@@ -1,18 +1,20 @@
+import "dotenv/config";
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import "dotenv/config";
 import { connection } from "./db/connection";
 import { routerFood } from "./routes/FoodRouter";
+import { routerOrders } from "./routes/OrdersRouter";
 
 const app = express();
 const jsonBodyParser = bodyParser.json();
 const urlParser = bodyParser.urlencoded({ extended: true });
 
+app.use(cors());
 app.use(jsonBodyParser);
 app.use(urlParser);
-app.use(cors());
 app.use(routerFood);
+app.use(routerOrders);
 
 const port = process.env.PORT;
 

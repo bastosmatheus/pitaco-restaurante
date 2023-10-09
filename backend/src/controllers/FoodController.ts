@@ -1,4 +1,5 @@
-import { FoodType } from "../@types";
+// import { Aggregate } from "mongoose";
+import { DishType } from "../@types";
 import { Food } from "../models/Food";
 import { Request, Response } from "express";
 
@@ -23,7 +24,7 @@ class FoodController {
 
   public async createDish(req: Request, res: Response): Promise<Response> {
     const { nameDish, image, value, ingredients, servesHowManyPeople, description } =
-      req.body as FoodType;
+      req.body as DishType;
 
     const newDish = {
       nameDish: nameDish,
@@ -37,7 +38,7 @@ class FoodController {
     const dish = await Food.create(newDish);
 
     if (!dish) {
-      return res.status(400).send({ message: "dish creation not possible. " });
+      return res.status(400).send({ message: "dish creation is not possible." });
     }
 
     return res.status(201).send("dish created with successful.");
@@ -57,7 +58,7 @@ class FoodController {
 
   public async updateDish(req: Request, res: Response): Promise<Response | undefined> {
     const { nameDish, image, value, ingredients, servesHowManyPeople, description } =
-      req.body as FoodType;
+      req.body as DishType;
 
     const id = req.params.id;
 

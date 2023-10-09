@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
-import { FoodType } from "../@types";
+import { DishType } from "../@types";
 
-const FoodResgistration = new mongoose.Schema<FoodType>({
+const FoodSchema = new mongoose.Schema<DishType>({
   nameDish: { type: String, required: true },
   image: { type: String, required: true },
   value: { type: Number, required: true },
@@ -10,4 +10,6 @@ const FoodResgistration = new mongoose.Schema<FoodType>({
   description: { type: String, required: true },
 });
 
-export const Food = mongoose.model("Foods", FoodResgistration);
+const Food = mongoose.model("Foods", FoodSchema);
+
+export { Food };

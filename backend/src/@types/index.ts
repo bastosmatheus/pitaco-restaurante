@@ -1,4 +1,4 @@
-export type FoodType = {
+type DishType = {
   nameDish: string;
   image: string;
   value: number;
@@ -7,4 +7,6 @@ export type FoodType = {
   description: string;
 };
 
-export type OrdersFoodType = Pick<FoodType, "nameDish" | "value">;
+type OrdersDishType = Pick<DishType, "nameDish" | "value">;
+
+export { DishType, OrdersDishType };
