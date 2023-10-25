@@ -67,7 +67,7 @@
         <section class="main-content__menu">
           <section class="main-content__crud">
             <ul class="main-content__list">
-              <li class="main-content__item">
+              <li class="main-content__item add">
                 <h2 class="main-content__title-action">Adicionar prato no cardápio</h2>
                 <i class="ph ph-arrow-elbow-right-down"></i>
                 <div class="main-content__card">
@@ -77,7 +77,7 @@
                   </h3>
                 </div>
               </li>
-              <li class="main-content__item">
+              <li class="main-content__item edit">
                 <h2 class="main-content__title-action">Editar prato do cardápio</h2>
                 <i class="ph ph-arrow-elbow-right-down"></i>
                 <div class="main-content__card">
@@ -86,7 +86,7 @@
                   </h3>
                 </div>
               </li>
-              <li class="main-content__item">
+              <li class="main-content__item remove">
                 <h2 class="main-content__title-action">Remover prato do cardápio</h2>
                 <i class="ph ph-arrow-elbow-right-down"></i>
                 <div class="main-content__card">
@@ -98,94 +98,96 @@
             </ul>
           </section>
         </section>
+
+        <section class="main-content__modals">
+          <div class="main-content__modal add">
+            <form action="">
+              <label for="nameDish">Nome do prato:</label>
+              <input
+                type="text"
+                id="nameDish"
+                placeholder="Nome do prato. Ex: strogonoff, filé de frango, etc.."
+                required
+              />
+
+              <label for="imageDish">Imagem do prato:</label>
+              <input
+                type="url"
+                name="imageDish"
+                id="imageDish"
+                placeholder="URL da imagem do prato."
+                required
+              />
+
+              <label for="valueDish">Valor do prato (R$):</label>
+              <input
+                type="text"
+                name="valueDish"
+                id="valueDish"
+                placeholder="Valor do prato."
+                required
+              />
+
+              <label for="ingredientsDish">Ingredientes da receita:</label>
+              <input
+                type="text"
+                name="ingredientsDish"
+                id="ingredientsDish"
+                placeholder="Ingredientes usados para fazer a receita."
+                required
+              />
+
+              <label for="howManyPersonsServe">Serve quantas pessoas:</label>
+              <input
+                type="number"
+                name="howManyPersonsServe"
+                id="howManyPersonsServe"
+                placeholder="Serve quantas pessoas?"
+                required
+              />
+
+              <label for="descriptionDish">Descrição do prato:</label>
+              <input
+                type="text"
+                name="descriptionDish"
+                id="descriptionDish"
+                placeholder="Descrição do prato."
+                required
+              />
+
+              <input type="submit" value="enviar" />
+            </form>
+          </div>
+
+          <div class="main-content__modal edit">
+            <form action="GET">
+              <label for="idDish">Id do prato:</label>
+              <input
+                type="text"
+                id="idDish"
+                placeholder="Id do prato. Ex: 65240a58d167d6023fbbf367"
+                required
+              />
+
+              <input type="submit" value="enviar" />
+            </form>
+          </div>
+
+          <div class="main-content__modal remove">
+            <form action="GET">
+              <label for="idDish">Id do prato:</label>
+              <input
+                type="text"
+                id="idDish"
+                placeholder="Id do prato. Ex: 65240a58d167d6023fbbf367"
+                required
+              />
+
+              <input type="submit" value="enviar" />
+            </form>
+          </div>
+        </section>
       </article>
-
-      <div class="main-content__modal add">
-        <form action="POST">
-          <label for="nameDish">Nome do prato:</label>
-          <input
-            type="text"
-            id="nameDish"
-            placeholder="Nome do prato. Ex: strogonoff, filé de frango, etc.."
-            required
-          />
-
-          <label for="imageDish">Imagem do prato:</label>
-          <input
-            type="url"
-            name="imageDish"
-            id="imageDish"
-            placeholder="URL da imagem do prato."
-            required
-          />
-
-          <label for="valueDish">Valor do prato:</label>
-          <input
-            type="text"
-            name="valueDish"
-            id="valueDish"
-            placeholder="Valor do prato."
-            required
-          />
-
-          <label for="ingredientsDish">Ingredientes da receita:</label>
-          <input
-            type="text"
-            name="ingredientsDish"
-            id="ingredientsDish"
-            placeholder="Ingredientes usados para fazer a receita."
-            required
-          />
-
-          <label for="howManyPersonsServe">Serve quantas pessoas:</label>
-          <input
-            type="number"
-            name="howManyPersonsServe"
-            id="howManyPersonsServe"
-            placeholder="Serve quantas pessoas."
-            required
-          />
-
-          <label for="descriptionDish">Descrição do prato:</label>
-          <input
-            type="text"
-            name="descriptionDish"
-            id="descriptionDish"
-            placeholder="Descrição do prato."
-            required
-          />
-
-          <input type="submit" value="enviar" />
-        </form>
-      </div>
-
-      <div class="main-content__modal edit">
-        <form action="POST">
-          <label for="idDish">Id do prato:</label>
-          <input
-            type="text"
-            id="idDish"
-            placeholder="Nome do prato. Ex: strogonoff, filé de frango, etc.."
-            required
-          />
-
-          <input type="submit" value="enviar" />
-        </form>
-      </div>
-
-      <div class="main-content__modal remove">
-        <form action="POST">
-          <label for="idDish">Id do prato:</label>
-          <input
-            type="text"
-            id="idDish"
-            placeholder="Nome do prato. Ex: strogonoff, filé de frango, etc.."
-            required
-          />
-
-          <input type="submit" value="enviar" />
-        </form>
-      </div>
     </main>
 
     <script src="/dist/index.js"></script>
