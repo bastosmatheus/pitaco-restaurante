@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pt-br">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,6 +16,8 @@
 
     <link rel="stylesheet" href="../styles/reset.css" />
     <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="../styles/sidebar.css" />
+    <link rel="stylesheet" href="../styles/dashboard/main-content.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
   </head>
   <body>
@@ -29,12 +31,16 @@
         <h3 class="sidebar__title-section">Executivo dos clientes</h3>
         <ul class="sidebar__list">
           <li class="sidebar__item">
-            <i class="ph ph-squares-four"></i>
-            Dashboard
+            <a href="dashboard.html" class="sidebar__link">
+              <i class="ph ph-squares-four"></i>
+              Dashboard
+            </a>
           </li>
           <li class="sidebar__item">
-            <i class="ph ph-cooking-pot"></i>
-            Pratos
+            <a href="menu.html" class="sidebar__link">
+              <i class="ph ph-cooking-pot"></i>
+              Cardápio
+            </a>
           </li>
         </ul>
 

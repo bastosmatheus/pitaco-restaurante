@@ -29,7 +29,7 @@
   gap: .5rem;
 }
 
-.sidebar__item {
+.sidebar__link {
   background-color: #75757521;
   border-radius: .5rem;
   color: var(--gray);
@@ -40,20 +40,21 @@
 
   font-size: .95rem;
   font-weight: 500;
+  text-decoration: none;
 
   padding: 1rem;
 
-  transition: 1s all;
+  transition: .7s all;
 
   cursor: pointer;
 }
 
-.sidebar__item:hover {
+.sidebar__link:hover {
   background-color: #ffdb29;
   color: var(--black);
 }
 
-.sidebar__item i {
+.sidebar__link i {
   font-size: 1.25rem;
 }
 

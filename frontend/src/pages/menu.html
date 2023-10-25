@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
+    />
+    <title>Cardápio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nanum+Brush+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles/reset.css" />
+    <link rel="stylesheet" href="../styles/base.css" />
+    <link rel="stylesheet" href="../styles/sidebar.css" />
+    <link rel="stylesheet" href="../styles/menu/main-content.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  </head>
+  <body>
+    <main>
+      <aside class="sidebar">
+        <img
+          class="sidebar__img"
+          src="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
+          alt="logo pitaco restaurante"
+        />
+        <h3 class="sidebar__title-section">Executivo dos clientes</h3>
+        <ul class="sidebar__list">
+          <li class="sidebar__item">
+            <a href="dashboard.html" class="sidebar__link">
+              <i class="ph ph-squares-four"></i>
+              Dashboard
+            </a>
+          </li>
+          <li class="sidebar__item">
+            <a href="menu.html" class="sidebar__link">
+              <i class="ph ph-cooking-pot"></i>
+              Cardápio
+            </a>
+          </li>
+        </ul>
+
+        <div class="sidebar__user">
+          <img
+            src="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
+            alt=""
+            class="sidebar__user-img"
+          />
+          <span class="sidebar__name">Matheus Bastos</span>
+          <i class="ph ph-sign-out"></i>
+        </div>
+      </aside>
+
+      <article class="main-content">
+        <header class="main-content__header">
+          <h1 class="main-content__title">Cardápio</h1>
+
+          <div class="main-content__icons">
+            <i class="ph ph-sun"></i>
+            <i class="ph ph-house"></i>
+          </div>
+        </header>
+
+        <section class="main-content__menu">
+          <section class="main-content__crud">
+            <ul class="main-content__list">
+              <li class="main-content__item">
+                <h2 class="main-content__title-action">Adicionar prato no cardápio</h2>
+                <i class="ph ph-arrow-elbow-right-down"></i>
+                <div class="main-content__card">
+                  <h3 class="main-content__title-card">
+                    O novo prato deve conter: nome, imagem, valor, ingredientes da receita, quantas
+                    pessoas esse prato serve e a descrição.
+                  </h3>
+                </div>
+              </li>
+              <li class="main-content__item">
+                <h2 class="main-content__title-action">Editar prato do cardápio</h2>
+                <i class="ph ph-arrow-elbow-right-down"></i>
+                <div class="main-content__card">
+                  <h3 class="main-content__title-card">
+                    Para a edição de um prato no cardápio, apenas o id do prato é necessário.
+                  </h3>
+                </div>
+              </li>
+              <li class="main-content__item">
+                <h2 class="main-content__title-action">Remover prato do cardápio</h2>
+                <i class="ph ph-arrow-elbow-right-down"></i>
+                <div class="main-content__card">
+                  <h3 class="main-content__title-card">
+                    Para a exclusão de um prato do cardápio, apenas o id do prato é necessário.
+                  </h3>
+                </div>
+              </li>
+            </ul>
+          </section>
+        </section>
+      </article>
+
+      <div class="main-content__modal add">
+        <form action="POST">
+          <label for="nameDish">Nome do prato:</label>
+          <input
+            type="text"
+            id="nameDish"
+            placeholder="Nome do prato. Ex: strogonoff, filé de frango, etc.."
+            required
+          />
+
+          <label for="imageDish">Imagem do prato:</label>
+          <input
+            type="url"
+            name="imageDish"
+            id="imageDish"
+            placeholder="URL da imagem do prato."
+            required
+          />
+
+          <label for="valueDish">Valor do prato:</label>
+          <input
+            type="text"
+            name="valueDish"
+            id="valueDish"
+            placeholder="Valor do prato."
+            required
+          />
+
+          <label for="ingredientsDish">Ingredientes da receita:</label>
+          <input
+            type="text"
+            name="ingredientsDish"
+            id="ingredientsDish"
+            placeholder="Ingredientes usados para fazer a receita."
+            required
+          />
+
+          <label for="howManyPersonsServe">Serve quantas pessoas:</label>
+          <input
+            type="number"
+            name="howManyPersonsServe"
+            id="howManyPersonsServe"
+            placeholder="Serve quantas pessoas."
+            required
+          />
+
+          <label for="descriptionDish">Descrição do prato:</label>
+          <input
+            type="text"
+            name="descriptionDish"
+            id="descriptionDish"
+            placeholder="Descrição do prato."
+            required
+          />
+
+          <input type="submit" value="enviar" />
+        </form>
+      </div>
+
+      <div class="main-content__modal edit">
+        <form action="POST">
+          <label for="idDish">Id do prato:</label>
+          <input
+            type="text"
+            id="idDish"
+            placeholder="Nome do prato. Ex: strogonoff, filé de frango, etc.."
+            required
+          />
+
+          <input type="submit" value="enviar" />
+        </form>
+      </div>
+
+      <div class="main-content__modal remove">
+        <form action="POST">
+          <label for="idDish">Id do prato:</label>
+          <input
+            type="text"
+            id="idDish"
+            placeholder="Nome do prato. Ex: strogonoff, filé de frango, etc.."
+            required
+          />
+
+          <input type="submit" value="enviar" />
+        </form>
+      </div>
+    </main>
+
+    <script src="/dist/index.js"></script>
+  </body>
+</html>
