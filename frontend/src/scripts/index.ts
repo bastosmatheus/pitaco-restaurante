@@ -1,7 +1,7 @@
-import { z } from "zod";
+// import { SelectAndValidateInputs } from "./inputs";
 
 class RenderModal {
-  constructor(private liList: NodeListOf<HTMLLIElement>) {}
+  constructor(protected liList: NodeListOf<HTMLLIElement>) {}
 
   isLi(): void {
     this.liList.forEach((li) => {
@@ -24,7 +24,17 @@ class RenderModal {
     sectionModals.style.display = `block`;
     modalForm.style.display = `block`;
 
-    this.selectInputs(modalForm, sectionModals);
+    const selectAndValidateInputs = new SelectAndValidateInputs(this.liList);
+
+    selectAndValidateInputs.selectInputs(modalForm, sectionModals);
+  }
+}
+
+import { z } from "zod";
+
+class SelectAndValidateInputs extends RenderModal {
+  constructor(liList: NodeListOf<HTMLLIElement>) {
+    super(liList);
   }
 
   selectInputs(modalForm: HTMLFormElement, sectionModals: HTMLElement): void {
@@ -34,38 +44,63 @@ class RenderModal {
       event.preventDefault();
 
       const inputs = modalForm.querySelectorAll(`input`) as NodeListOf<HTMLInputElement>;
-      if (this.validateInputs(inputs)) {
-        modalForm.style.display = "none";
-        sectionModals.style.display = "none";
+
+      const validation = this.validateInputs(inputs);
+
+      if (validation.success) {
+        console.log(validation.data);
       }
     });
   }
 
-  validateInputs(inputs: NodeListOf<HTMLInputElement>): boolean {
-    const dishSchema = z.object({
-      nameDish: z.string().min(3, { message: "O prato deve conter no minimo 3 caracteres." }),
-      image: z.string().url({ message: "Digite um URL válido." }),
-      value: z.number(),
-      ingredients: z.array(z.string()),
-      servesHowManyPeople: z
-        .number()
-        .min(1, { message: "O prato deve servir ao menos uma pessoa." }),
-      description: z.string(),
+  validateInputs(inputs: NodeListOf<HTMLInputElement>) {
+    if (inputs.length > 2) {
+      const [nameDish, image, value, ingredients, servesHowManyPeople, description] = inputs;
+
+      const dishSchema = z.object({
+        nameDish: z.string().min(3, { message: "O prato deve conter no minimo 3 caracteres." }),
+        image: z.string().url({ message: "Digite um URL válido." }),
+        value: z.number().min(0.5, { message: "Insira um valor válido." }),
+        ingredients: z
+          .array(z.string())
+          .min(1, { message: "Insira os ingredientes usados na receita." }),
+        servesHowManyPeople: z
+          .number()
+          .min(1, { message: "O prato deve servir ao menos uma pessoa." }),
+        description: z.string().min(1, { message: "Insira uma descrição." }),
+      });
+
+      const result = dishSchema.safeParse({
+        nameDish: nameDish.value,
+        image: image.value,
+        value: parseInt(value.value),
+        ingredients: [...ingredients.value],
+        servesHowManyPeople: parseInt(servesHowManyPeople.value),
+        description: description.value,
+      });
+
+      return result;
+    }
+
+    const [id] = inputs;
+
+    const idSchema = z.object({
+      idDish: z
+        .string()
+        .min(24, { message: "O ID deve conter pelo menos 24 caracteres." })
+        .max(24, { message: "O ID não pode ter mais de 24 caracteres." }),
     });
 
-    const result = dishSchema.safeParse({
-      nameDish: inputs[0].value,
-      image: inputs[1].value,
-      value: parseInt(inputs[2].value),
-      ingredients: [...inputs[3].value],
-      servesHowManyPeople: parseInt(inputs[4].value),
-      description: inputs[5].value,
+    const result = idSchema.safeParse({
+      idDish: id.value,
     });
 
-    return result.success;
+    console.log(result);
+
+    return result;
   }
 }
 
-const divs = document.querySelectorAll(`.main-content__item`) as NodeListOf<HTMLLIElement>;
-const renderModal = new RenderModal(divs);
+const lis = document.querySelectorAll(`.main-content__item`) as NodeListOf<HTMLLIElement>;
+const renderModal = new RenderModal(lis);
 renderModal.isLi();
