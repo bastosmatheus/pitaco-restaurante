@@ -7,7 +7,7 @@
   "scripts": {
     "dev:backend": "tsx watch backend/src/server.ts",
     "build:backend": "tsup backend/src",
-    "build:frontend": "tsup frontend/src/scripts/index.ts --format esm --watch",
+    "build:frontend": "tsup",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "matheus",
