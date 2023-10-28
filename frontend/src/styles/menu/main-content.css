@@ -139,21 +139,32 @@ form label {
 
 form input {
   background-color: #7575751f;
+  border: 2px solid transparent;
   border-radius: .25rem;
-  border: none;
+  outline: 0;
 
-  margin: 1rem 0;
+  margin-top: .5rem;
   padding: .5rem;
 
   width: 100%;
 }
 
 form input:focus {
-  outline: 2px solid var(--yellow);
+  border: 2px solid var(--yellow);
 }
 
 form input::placeholder {
   color: var(--gray);
+}
+
+form .main-content__error {
+  color: red;
+
+  display: block;
+
+  font-size: .75rem;
+
+  margin: .5rem 0;
 }
 
 form input[type="submit"] {

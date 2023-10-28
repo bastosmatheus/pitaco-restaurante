@@ -107,8 +107,9 @@
                 type="text"
                 id="nameDish"
                 placeholder="Nome do prato. Ex: strogonoff, filé de frango, etc.."
-                required
+                autocomplete="off"
               />
+              <span class="main-content__error"></span>
 
               <label for="imageDish">Imagem do prato:</label>
               <input
@@ -116,8 +117,9 @@
                 name="imageDish"
                 id="imageDish"
                 placeholder="URL da imagem do prato."
-                required
+                autocomplete="off"
               />
+              <span class="main-content__error"></span>
 
               <label for="valueDish">Valor do prato (R$):</label>
               <input
@@ -125,8 +127,9 @@
                 name="valueDish"
                 id="valueDish"
                 placeholder="Valor do prato."
-                required
+                autocomplete="off"
               />
+              <span class="main-content__error"></span>
 
               <label for="ingredientsDish">Ingredientes da receita:</label>
               <input
@@ -134,17 +137,19 @@
                 name="ingredientsDish"
                 id="ingredientsDish"
                 placeholder="Ingredientes usados para fazer a receita."
-                required
+                autocomplete="off"
               />
+              <span class="main-content__error"></span>
 
-              <label for="howManyPersonsServe">Serve quantas pessoas:</label>
+              <label for="servesHowManyPeople">Serve quantas pessoas:</label>
               <input
                 type="number"
-                name="howManyPersonsServe"
-                id="howManyPersonsServe"
+                name="servesHowManyPeople"
+                id="servesHowManyPeople"
                 placeholder="Serve quantas pessoas?"
-                required
+                autocomplete="off"
               />
+              <span class="main-content__error"></span>
 
               <label for="descriptionDish">Descrição do prato:</label>
               <input
@@ -152,8 +157,9 @@
                 name="descriptionDish"
                 id="descriptionDish"
                 placeholder="Descrição do prato."
-                required
+                autocomplete="off"
               />
+              <span class="main-content__error"></span>
 
               <input type="submit" value="enviar" />
             </form>
@@ -166,7 +172,6 @@
                 type="text"
                 id="idDish"
                 placeholder="Id do prato. Ex: 65240a58d167d6023fbbf367"
-                required
               />
 
               <input type="submit" value="enviar" />
@@ -180,7 +185,6 @@
                 type="text"
                 id="idDish"
                 placeholder="Id do prato. Ex: 65240a58d167d6023fbbf367"
-                required
               />
 
               <input type="submit" value="enviar" />
@@ -190,6 +194,6 @@
       </article>
     </main>
 
-    <script src="/frontend/dist/index.js"></script>
+    <script type="module" src="/frontend/dist/index.js"></script>
   </body>
 </html>
