@@ -11,16 +11,43 @@ export class SelectAndValidateInputs extends RenderModal {
       event.preventDefault();
 
       const inputs = modalForm.querySelectorAll(`input`) as NodeListOf<HTMLInputElement>;
+      const spansError = document.querySelectorAll(
+        ".main-content__error"
+      ) as NodeListOf<HTMLSpanElement>;
 
-      const validation = this.validateInputs(inputs);
+      spansError.forEach((spanError) => {
+        spanError.innerText = ``;
+      });
+
+      inputs.forEach((input) => {
+        input.style.border = "2px solid transparent";
+      });
+
+      this.addErrorMessageInSpanAndStyling(inputs);
+    });
+  }
+
+  addErrorMessageInSpanAndStyling(inputs: NodeListOf<HTMLInputElement>) {
+    const validation = this.validateInputs(inputs);
+
+    if (!validation.success) {
       const validationErrors = validation.error.issues;
 
-      if (validationErrors.length > 0) {
+      inputs.forEach((input: HTMLInputElement) => {
+        const idInput = input.id;
+        const spanError = input.nextElementSibling as HTMLSpanElement;
+
         validationErrors.forEach((error: {}) => {
-          this.setError(error.path, error.message);
+          if (error.path[0] === idInput) {
+            this.setError(input, spanError, error.message);
+          }
         });
-      }
-    });
+      });
+    }
+
+    if (validation.success) {
+      console.log(validation.data);
+    }
   }
 
   validateInputs(inputs: NodeListOf<HTMLInputElement>) {
@@ -36,7 +63,7 @@ export class SelectAndValidateInputs extends RenderModal {
           .min(0.5, { message: "Insira um valor válido." }),
         ingredientsDish: z
           .array(z.string())
-          .min(1, { message: "Insira os ingredientes usados na receita." }),
+          .min(2, { message: "Insira os ingredientes usados na receita." }),
         servesHowManyPeople: z
           .number()
           .min(1, { message: "O prato deve servir ao menos uma pessoa." }),
@@ -71,10 +98,8 @@ export class SelectAndValidateInputs extends RenderModal {
     return result;
   }
 
-  setError(idInput: string, messageError: string) {
-    const input = document.querySelector(`#${idInput}`) as HTMLInputElement;
-    const error = input.nextElementSibling as HTMLSpanElement;
-    error.innerText = `${messageError}`;
+  setError(input: HTMLInputElement, spanError: HTMLSpanElement, messageError: string) {
+    spanError.innerText = `${messageError}`;
     input.style.border = "2px solid red";
   }
 }
