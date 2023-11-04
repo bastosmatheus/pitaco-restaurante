@@ -1,4 +1,4 @@
-import { SelectAndValidateInputs } from "../scripts/inputs";
+import { SelectAndValidateInputs } from "./inputs";
 
 export class RenderModal {
   constructor(protected liList: NodeListOf<HTMLLIElement>) {}
@@ -26,7 +26,7 @@ export class RenderModal {
 
     const selectAndValidateInputs = new SelectAndValidateInputs(this.liList);
 
-    selectAndValidateInputs.selectInputs(modalForm, sectionModals);
+    selectAndValidateInputs.selectInputs(modalForm);
   }
 }
 
