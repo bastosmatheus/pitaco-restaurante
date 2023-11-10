@@ -23,18 +23,34 @@
       <h1 class="login__title">Login</h1>
 
       <form action="">
-        <div class="login__input">
+        <div class="login__div-inputs">
           <i class="ph-fill ph-user"></i>
-          <input type="text" name="username" placeholder="Usuário" autocomplete="off" />
+          <input
+            type="text"
+            class="login__input"
+            name="username"
+            placeholder="Usuário"
+            autocomplete="off"
+          />
         </div>
 
-        <div class="login__input">
+        <div class="login__div-inputs">
           <i class="ph-fill ph-lock-simple"></i>
-          <input type="password" name="password" placeholder="Senha" autocomplete="off" />
+          <input
+            type="password"
+            class="login__input"
+            name="password"
+            placeholder="Senha"
+            autocomplete="off"
+          />
         </div>
 
-        <input type="submit" value="Entrar" />
+        <a href="#" class="login__link">Esqueceu sua senha?</a>
+
+        <input type="submit" value="Login" />
       </form>
+
+      <a href="#" class="login__link">Crie uma conta</a>
     </section>
   </body>
 </html>
