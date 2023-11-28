@@ -6,7 +6,7 @@ body {
   justify-content: center;
 }
 
-.login {
+.cadastro {
   background-color: var(--white);
   border-radius: 1rem;
   box-shadow: 20px 20px 60px var(--black);
@@ -14,22 +14,22 @@ body {
   padding: 1.5rem;
 }
 
-.login__title {
+.cadastro__title {
   color: var(--black);
 
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 700;
+
+  margin-bottom: 1rem;
 }
 
-.login form {
+.cadastro form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-
-  margin: 1rem 0;
 }
 
-.login__div-inputs {
+.cadastro__div-inputs {
   background-color: #7575753a;
   outline: 1px solid transparent;
   border-radius: .5rem;
@@ -43,16 +43,16 @@ body {
   transition: .5s outline;
 }
 
-.login__div-inputs:hover,
-.login__div-inputs:has(input:focus) {
+.cadastro__div-inputs:hover,
+.cadastro__div-inputs:has(input:focus) {
   outline: 1px solid var(--black);
 }
 
-.login__div-inputs i {
+.cadastro__div-inputs i {
   color: #0a0908cc;
 }
 
-.login__input {
+.cadastro__input {
   background-color: transparent;
   border: 1px solid transparent;
   outline: none;
@@ -63,7 +63,7 @@ body {
   width: 100%;
 }
 
-.login__link {
+.cadastro__link {
   color: var(--gray);
 
   display: block;
@@ -77,11 +77,11 @@ body {
   transition: .5s color;
 }
 
-form~.login__link {
+form~.cadastro__link {
   font-size: .9rem;
 }
 
-.login__link:hover {
+.cadastro__link:hover {
   color: var(--black);
 }
 

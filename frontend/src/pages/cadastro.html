@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login | Pitaco Restaurante</title>
+    <title>Cadastro | Pitaco Restaurante</title>
     <link
       rel="shortcut icon"
       type="image/x-icon"
@@ -15,42 +15,49 @@
     />
     <link rel="stylesheet" href="../styles/reset.css" />
     <link rel="stylesheet" href="../styles/base.css" />
-    <link rel="stylesheet" href="../styles/login/login.css" />
+    <link rel="stylesheet" href="../styles/cadastro/cadastro.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
   </head>
   <body>
-    <section class="login">
-      <h1 class="login__title">Login</h1>
+    <section class="cadastro">
+      <h1 class="cadastro__title">Cadastro</h1>
 
       <form action="">
-        <div class="login__div-inputs">
+        <div class="cadastro__div-inputs">
           <i class="ph-fill ph-user"></i>
           <input
             type="text"
-            class="login__input"
+            class="cadastro__input"
             name="username"
             placeholder="Usuário"
             autocomplete="off"
           />
         </div>
 
-        <div class="login__div-inputs">
+        <div class="cadastro__div-inputs">
+          <i class="ph-fill ph-envelope"></i>
+          <input
+            type="email"
+            class="cadastro__input"
+            name="email"
+            placeholder="Email"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="cadastro__div-inputs">
           <i class="ph-fill ph-lock-simple"></i>
           <input
             type="password"
-            class="login__input"
+            class="cadastro__input"
             name="password"
             placeholder="Senha"
             autocomplete="off"
           />
         </div>
 
-        <a href="#" class="login__link">Esqueceu sua senha?</a>
-
-        <input type="submit" value="Login" />
+        <input type="submit" value="Cadastrar" />
       </form>
-
-      <a href="cadastro.html" class="login__link">Crie uma conta</a>
     </section>
   </body>
 </html>
