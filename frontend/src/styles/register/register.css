@@ -6,7 +6,7 @@ body {
   justify-content: center;
 }
 
-.cadastro {
+.register {
   background-color: var(--white);
   border-radius: 1rem;
   box-shadow: 20px 20px 60px var(--black);
@@ -14,7 +14,7 @@ body {
   padding: 1.5rem;
 }
 
-.cadastro__title {
+.register__title {
   color: var(--black);
 
   font-size: 1.25rem;
@@ -23,13 +23,13 @@ body {
   margin-bottom: 1rem;
 }
 
-.cadastro form {
+.register form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
-.cadastro__div-inputs {
+.register__div-inputs {
   background-color: #7575753a;
   outline: 1px solid transparent;
   border-radius: .5rem;
@@ -43,16 +43,16 @@ body {
   transition: .5s outline;
 }
 
-.cadastro__div-inputs:hover,
-.cadastro__div-inputs:has(input:focus) {
+.register__div-inputs:hover,
+.register__div-inputs:has(input:focus) {
   outline: 1px solid var(--black);
 }
 
-.cadastro__div-inputs i {
+.register__div-inputs i {
   color: #0a0908cc;
 }
 
-.cadastro__input {
+.register__input {
   background-color: transparent;
   border: 1px solid transparent;
   outline: none;
@@ -63,7 +63,7 @@ body {
   width: 100%;
 }
 
-.cadastro__link {
+.register__link {
   color: var(--gray);
 
   display: block;
@@ -77,11 +77,11 @@ body {
   transition: .5s color;
 }
 
-form~.cadastro__link {
+form~.register__link {
   font-size: .9rem;
 }
 
-.cadastro__link:hover {
+.register__link:hover {
   color: var(--black);
 }
 
