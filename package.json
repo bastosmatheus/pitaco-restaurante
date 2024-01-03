@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "dev:backend": "tsx watch backend/src/server.ts",
-    "build:backend": "tsup backend/src",
-    "build:frontend": "tsup",
+    "dev:frontend": "tsx watch frontend/src/server.ts",
+    "build:backend": "tsup backend/src --format esm --watch --outDir backend/dist",
+    "build:frontend": "tsup frontend/src/scripts --format esm --watch --outDir frontend/src/public/dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "matheus",
