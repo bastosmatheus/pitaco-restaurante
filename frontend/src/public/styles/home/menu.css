@@ -1,0 +1,68 @@
+.menu__title {
+  margin-bottom: 0.35rem
+}
+
+.menu__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menu__item {
+  border: 1px solid var(--black);
+  border-radius: .25rem;
+
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  padding: 1rem;
+
+  transition: .5s all;
+}
+
+.menu__item:hover {
+  border: 1px solid var(--yellow);
+}
+
+.menu__first-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.menu__name-dish {
+  font-weight: 500;
+
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+
+  line-height: 1.15;
+}
+
+.menu__dish-description {
+  color: #717171;
+  font-size: .75rem;
+
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+}
+
+.menu__serves-how-many-people {
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+
+.menu__price {
+  color: var(--green);
+}
+
+.menu__img {
+  border-radius: .5rem;
+
+  max-width: 6rem;
+}

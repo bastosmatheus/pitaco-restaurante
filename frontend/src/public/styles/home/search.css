@@ -1,0 +1,24 @@
+.search {
+  width: 100%;
+}
+
+.search__title {
+  margin-bottom: .35rem;
+}
+
+.search__input {
+  background-color: #7575751f;
+  border: 1px solid var(--black);
+  border-radius: .5rem;
+  outline: none;
+
+  width: 100%;
+
+  padding: .5rem;
+
+  transition: .3s all;
+}
+
+.search__input:focus {
+  border: 1px solid var(--yellow);
+}

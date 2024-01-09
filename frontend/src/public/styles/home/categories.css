@@ -1,0 +1,41 @@
+.categories__title {
+  margin-bottom: .35rem;
+}
+
+.categories__list {
+  display: flex;
+  gap: 1rem;
+
+  padding-bottom: .5rem;
+
+  overflow-x: scroll;
+}
+
+.categories__link {
+  background-color: var(--yellow);
+  border: 1px solid var(--black);
+  border-radius: .5rem;
+  color: var(--black);
+
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+
+  padding: .5rem;
+
+  width: max-content;
+
+  transition: all .5s;
+
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+.categories__item i {
+  font-size: 1.25rem;
+}
+
+.categories__item:hover {
+  opacity: 0.75;
+}

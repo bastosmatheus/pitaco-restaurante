@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nanum+Brush+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/home/header.css" />
+    <link rel="stylesheet" href="styles/home/main.css" />
+    <link rel="stylesheet" href="styles/home/search.css" />
+    <link rel="stylesheet" href="styles/home/categories.css" />
+    <link rel="stylesheet" href="styles/home/menu.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <title>Pitaco Restaurante</title>
+  </head>
+
+  <body>
+    <header class="header">
+      <img
+        src="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
+        alt="logo do pitaco"
+        class="header__img"
+      />
+      <i class="ph-bold ph-list"></i>
+      <nav class="header__nav">
+        <ul class="header__list">
+          <li class="header__item">
+            <a class="header__link" href="/cart">
+              <i class="ph-light ph-shopping-cart"></i>
+              Carrinho
+            </a>
+          </li>
+          <li class="header__item">
+            <a class="header__link">
+              <i class="ph-light ph-sign-out"></i>
+              Sair
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="search">
+        <h3 class="search__title">Procurar</h3>
+        <input
+          type="search"
+          class="search__input"
+          placeholder="Buscar no cardápio. Ex: filé de frango"
+        />
+      </section>
+      <section class="categories">
+        <h3 class="categories__title">Categorias</h3>
+        <ul class="categories__list">
+          <li class="categories__item">
+            <a href="#mais-vendidos" class="categories__link">
+              <i class="ph-light ph-star"></i>
+              Mais vendidos
+            </a>
+          </li>
+          <li class="categories__item">
+            <a href="" class="categories__link">
+              <i class="ph-light ph-fork-knife"></i>
+              Match perfeito
+            </a>
+          </li>
+          <li class="categories__item">
+            <a href="" class="categories__link">
+              <i class="ph-light ph-popcorn"></i>
+              Menu premium
+            </a>
+          </li>
+          <li class="categories__item">
+            <a href="" class="categories__link">
+              <i class="ph-light ph-beer-bottle"></i>
+              Bebidas
+            </a>
+          </li>
+        </ul>
+      </section>
+      <section class="menu">
+        <h3 class="menu__title">Os mais vendidos!</h3>
+        <ul class="menu__list" id="mais-vendidos"></ul>
+      </section>
+    </main>
+
+    <script type="module" src="dist/menu.js"></script>
+  </body>
+</html>
