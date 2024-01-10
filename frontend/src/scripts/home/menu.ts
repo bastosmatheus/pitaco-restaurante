@@ -1,11 +1,14 @@
-import { structure } from "./structure";
+import { structure } from "../structure";
+import { inputSearch } from "./inputSearch";
 
 export class Menu {
-  public static readonly liMenu: HTMLElement = document.querySelector(
+  public static readonly ulMenu: HTMLLIElement = document.querySelector(
     ".menu__list"
   ) as HTMLLIElement;
 
   public static structure: structure = new structure();
+
+  public static input: inputSearch = new inputSearch();
 
   public static renderAllDishes(): void {
     fetch("http://localhost:3000/alldishs")
@@ -22,7 +25,6 @@ export class Menu {
     const imgDish = this.structure.createElement("img", {
       class: "menu__img",
       loading: "lazy",
-      src: "",
     });
     const divFirstColumn = this.structure.createElement("div", { class: "menu__first-column" });
     const h2NameDish = this.structure.createElement("h2", { class: "menu__name-dish" });
@@ -38,7 +40,7 @@ export class Menu {
     divFirstColumn.appendChild(pDishDescription);
     divFirstColumn.appendChild(spanServes);
     divFirstColumn.appendChild(spanPrice);
-    this.liMenu.appendChild(li);
+    this.ulMenu.appendChild(li);
 
     this.addInfosInLi(
       li,
@@ -50,6 +52,8 @@ export class Menu {
       spanPrice,
       data
     );
+
+    this.input.searching(li);
   }
 
   public static addInfosInLi(
@@ -61,8 +65,7 @@ export class Menu {
     spanServes: HTMLElement,
     spanPrice: HTMLElement,
     data: unknown
-  ) {
-    console.log(data);
+  ): void {
     imgDish.setAttribute("src", data.image);
     imgDish.setAttribute("alt", data.nameDish);
     imgDish.setAttribute("title", data.nameDish);

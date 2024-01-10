@@ -5,6 +5,7 @@ const app = express();
 const __dirname = new URL(".", import.meta.url).pathname.slice(1);
 
 app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/public/dist"));
 
 app.use("/cart", (req, res) => {
   res.sendFile(__dirname + "/pages/cart.html");
