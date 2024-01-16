@@ -7,6 +7,7 @@ export class Hamburger {
     this.menuHamburger.addEventListener("click", () => {
       this.nav.classList.add("show-nav");
       this.ul.classList.add("transition-ul");
+      document.body.style.overflow = "hidden";
     });
 
     this.nav.addEventListener("click", (event) => {
@@ -16,6 +17,7 @@ export class Hamburger {
       ) {
         this.nav.classList.remove("show-nav");
         this.ul.classList.remove("transition-ul");
+        document.body.style.overflow = "auto";
       }
     });
   }

@@ -1,26 +1,28 @@
-import { structure } from "../structure";
+import { Structure } from "../structure";
 import { InputSearch } from "./inputSearch";
 
 export class Menu {
-  public static readonly ulMenu: HTMLLIElement = document.querySelector(
+  public readonly ulsMenu: NodeListOf<HTMLElement> = document.querySelectorAll(
     ".menu__list"
-  ) as HTMLLIElement;
+  ) as NodeListOf<HTMLElement>;
 
-  public static structure: structure = new structure();
+  public readonly structure: Structure = new Structure();
 
-  public static input: InputSearch = new InputSearch();
+  public readonly input: InputSearch = new InputSearch();
 
-  public static renderAllDishes(): void {
+  public renderAllDishes(): void {
     fetch("http://localhost:3000/alldishs")
       .then((response) => response.json())
       .then((arrayData: Array<Response>) => {
         arrayData.forEach((data: unknown) => {
-          this.createLiAndAddInTheList(data);
+          this.ulsMenu.forEach((ul) => {
+            this.createLiAndAddInTheList(data, ul);
+          });
         });
       });
   }
 
-  public static createLiAndAddInTheList(data: unknown) {
+  public createLiAndAddInTheList(data: unknown, ulMenu: HTMLElement) {
     const li = this.structure.createElement("li", { class: "menu__item" });
     const imgDish = this.structure.createElement("img", {
       class: "menu__img",
@@ -40,7 +42,6 @@ export class Menu {
     divFirstColumn.appendChild(pDishDescription);
     divFirstColumn.appendChild(spanServes);
     divFirstColumn.appendChild(spanPrice);
-    this.ulMenu.appendChild(li);
 
     this.addInfosInLi(
       li,
@@ -53,10 +54,30 @@ export class Menu {
       data
     );
 
+    this.verifyCategory(ulMenu, data, li);
+  }
+
+  public verifyCategory(ulMenu: HTMLElement, data: unknown, li: HTMLElement) {
+    if (ulMenu.id === "mais-vendidos" && data.category === "Mais Vendidos") {
+      ulMenu.appendChild(li);
+    }
+
+    if (ulMenu.id === "menu-premium" && data.category === "Menu Premium") {
+      ulMenu.appendChild(li);
+    }
+
+    if (ulMenu.id === "match-perfeito" && data.category === "Match Perfeito") {
+      ulMenu.appendChild(li);
+    }
+
+    if (ulMenu.id === "bebidas" && data.category === "Bebidas") {
+      ulMenu.appendChild(li);
+    }
+
     this.input.searching(li);
   }
 
-  public static addInfosInLi(
+  public addInfosInLi(
     li: HTMLElement,
     imgDish: HTMLElement,
     divFirstColumn: HTMLElement,
@@ -80,4 +101,5 @@ export class Menu {
   }
 }
 
-Menu.renderAllDishes();
+const menu: Menu = new Menu();
+menu.renderAllDishes();

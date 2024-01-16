@@ -23,8 +23,16 @@ class FoodController {
   }
 
   public async createDish(req: Request, res: Response): Promise<Response> {
-    const { nameDish, image, value, ingredients, servesHowManyPeople, description } =
-      req.body as DishType;
+    const {
+      nameDish,
+      image,
+      value,
+      ingredients,
+      servesHowManyPeople,
+      description,
+      category,
+      weight,
+    } = req.body;
 
     const newDish = {
       nameDish: nameDish,
@@ -33,6 +41,8 @@ class FoodController {
       ingredients: ingredients,
       servesHowManyPeople: servesHowManyPeople,
       description: description,
+      category: category,
+      weight: weight,
     };
 
     const dish = await Food.create(newDish);
