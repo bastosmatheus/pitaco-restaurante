@@ -1,5 +1,5 @@
 import { structure } from "../structure";
-import { inputSearch } from "./inputSearch";
+import { InputSearch } from "./inputSearch";
 
 export class Menu {
   public static readonly ulMenu: HTMLLIElement = document.querySelector(
@@ -8,7 +8,7 @@ export class Menu {
 
   public static structure: structure = new structure();
 
-  public static input: inputSearch = new inputSearch();
+  public static input: InputSearch = new InputSearch();
 
   public static renderAllDishes(): void {
     fetch("http://localhost:3000/alldishs")

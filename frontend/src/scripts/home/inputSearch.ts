@@ -1,11 +1,7 @@
-export class inputSearch {
+export class InputSearch {
   public inputSearch: HTMLInputElement = document.querySelector(
     ".search__input"
   ) as HTMLInputElement;
-
-  public nameDish: NodeListOf<HTMLElement> = document.querySelectorAll(
-    ".menu__name-dish"
-  ) as NodeListOf<HTMLElement>;
 
   public searching(li: HTMLElement) {
     this.inputSearch.addEventListener("input", () => {

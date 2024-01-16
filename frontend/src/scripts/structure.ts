@@ -1,4 +1,4 @@
-export class structure {
+export class Structure {
   public createElement(tagName: string, attributes: { [s: string]: unknown } | Array<unknown>) {
     const element = document.createElement(tagName);
     const arrayAttributes = Object.entries(attributes);
