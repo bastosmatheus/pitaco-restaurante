@@ -22,3 +22,13 @@
 .search__input:focus {
   border: 1px solid var(--yellow);
 }
+
+@media (min-width: 1024px) {
+  .search__title {
+    font-size: 1.125rem;
+  }
+
+  .search__input {
+    width: 49.65%;
+  }
+}

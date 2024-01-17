@@ -12,3 +12,15 @@ main {
 main h3 {
   font-weight: 700;
 }
+
+@media (min-width: 1024px) {
+  main {
+    padding: 8rem 2.5rem 2rem 2.5rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  main {
+    padding: 8rem 4rem 2rem 4rem;
+  }
+}

@@ -27,7 +27,7 @@ app.use("/menu", (req, res) => {
   res.sendFile(__dirname + "/pages/menu.html");
 });
 
-app.use("/", (req, res) => {
+app.use("", (req, res) => {
   res.sendFile(__dirname + "/pages/home.html");
 });
 

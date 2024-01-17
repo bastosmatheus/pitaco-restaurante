@@ -5,6 +5,8 @@
 }
 
 .menu__title {
+  font-size: 1.125rem;
+
   margin-bottom: 0.35rem
 }
 
@@ -32,20 +34,21 @@
 }
 
 .menu__first-column {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 1rem;
+  align-items: center;
+
+  height: 100%;
 }
 
 .menu__name-dish {
   font-weight: 500;
+  line-height: 1.15;
 
   overflow: hidden;
   -webkit-box-orient: vertical;
   display: -webkit-box;
   -webkit-line-clamp: 2;
-
-  line-height: 1.15;
 }
 
 .menu__dish-description {
@@ -82,5 +85,25 @@
 @media (min-width: 425px) {
   .menu__dish-description {
     font-size: .875rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .menu {
+    gap: 2.5rem;
+  }
+
+  .menu__list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .menu__name-dish {
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .menu__title {
+    font-size: 1.5rem;
   }
 }

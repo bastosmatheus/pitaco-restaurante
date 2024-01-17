@@ -14,15 +14,13 @@ export class Menu {
     fetch("http://localhost:3000/alldishs")
       .then((response) => response.json())
       .then((arrayData: Array<Response>) => {
-        arrayData.forEach((data: unknown) => {
-          this.ulsMenu.forEach((ul) => {
-            this.createLiAndAddInTheList(data, ul);
-          });
+        arrayData.forEach((data: Response) => {
+          this.createLiAndAddInTheList(data);
         });
       });
   }
 
-  public createLiAndAddInTheList(data: unknown, ulMenu: HTMLElement) {
+  public createLiAndAddInTheList(data: Response) {
     const li = this.structure.createElement("li", { class: "menu__item" });
     const imgDish = this.structure.createElement("img", {
       class: "menu__img",
@@ -30,7 +28,9 @@ export class Menu {
     });
     const divFirstColumn = this.structure.createElement("div", { class: "menu__first-column" });
     const h2NameDish = this.structure.createElement("h2", { class: "menu__name-dish" });
-    const pDishDescription = this.structure.createElement("p", { class: "menu__dish-description" });
+    const pDishDescription = this.structure.createElement("p", {
+      class: "menu__dish-description",
+    });
     const spanServes = this.structure.createElement("span", {
       class: "menu__serves-how-many-people",
     });
@@ -43,44 +43,35 @@ export class Menu {
     divFirstColumn.appendChild(spanServes);
     divFirstColumn.appendChild(spanPrice);
 
-    this.addInfosInLi(
-      li,
-      imgDish,
-      divFirstColumn,
-      h2NameDish,
-      pDishDescription,
-      spanServes,
-      spanPrice,
-      data
-    );
-
-    this.verifyCategory(ulMenu, data, li);
+    this.addInfosInLi(li, imgDish, h2NameDish, pDishDescription, spanServes, spanPrice, data);
   }
 
-  public verifyCategory(ulMenu: HTMLElement, data: unknown, li: HTMLElement) {
-    if (ulMenu.id === "mais-vendidos" && data.category === "Mais Vendidos") {
-      ulMenu.appendChild(li);
-    }
+  //refactor
+  public verifyCategory(li: HTMLElement, category: string) {
+    this.ulsMenu.forEach((ul) => {
+      if (ul.id === "mais-vendidos" && category.toLowerCase() === "mais vendidos") {
+        ul.appendChild(li);
+      }
 
-    if (ulMenu.id === "menu-premium" && data.category === "Menu Premium") {
-      ulMenu.appendChild(li);
-    }
+      if (ul.id === "menu-premium" && category.toLowerCase() === "menu premium") {
+        ul.appendChild(li);
+      }
 
-    if (ulMenu.id === "match-perfeito" && data.category === "Match Perfeito") {
-      ulMenu.appendChild(li);
-    }
+      if (ul.id === "match-perfeito" && category.toLowerCase() === "match perfeito") {
+        ul.appendChild(li);
+      }
 
-    if (ulMenu.id === "bebidas" && data.category === "Bebidas") {
-      ulMenu.appendChild(li);
-    }
+      if (ul.id === "bebidas" && category.toLowerCase() === "bebidas") {
+        ul.appendChild(li);
+      }
 
-    this.input.searching(li);
+      this.input.searching(li);
+    });
   }
 
   public addInfosInLi(
     li: HTMLElement,
     imgDish: HTMLElement,
-    divFirstColumn: HTMLElement,
     h2NameDish: HTMLElement,
     pDishDescription: HTMLElement,
     spanServes: HTMLElement,
@@ -98,6 +89,7 @@ export class Menu {
         : `Serve ${data.servesHowManyPeople} pessoa.`
     }`;
     spanPrice.innerText = `R$ ${data.value}`;
+    this.verifyCategory(li, data.category);
   }
 }
 

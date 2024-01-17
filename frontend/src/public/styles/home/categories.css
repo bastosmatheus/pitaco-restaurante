@@ -11,6 +11,12 @@
   overflow-x: scroll;
 }
 
+.categories__item {
+  flex: 1;
+
+  transition: all .5s;
+}
+
 .categories__link {
   background-color: var(--yellow);
   border: 1px solid var(--black);
@@ -25,8 +31,6 @@
 
   width: max-content;
 
-  transition: all .5s;
-
   text-decoration: none;
 
   cursor: pointer;
@@ -38,4 +42,35 @@
 
 .categories__item:hover {
   opacity: 0.75;
+}
+
+@media (min-width: 660px) {
+  .categories__item {
+    display: flex;
+  }
+
+  .categories__link {
+    justify-content: center;
+    flex: 1;
+
+    font-size: 1.15rem;
+
+    padding: .5rem .75rem;
+  }
+
+  .categories__link i {
+    font-size: 1.25rem;
+  }
+}
+
+@media (min-width: 750px) {
+  .categories__list {
+    overflow-x: hidden;
+  }
+}
+
+@media (min-width: 1024px) {
+  .categories__title {
+    font-size: 1.125rem;
+  }
 }
