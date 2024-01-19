@@ -1,5 +1,5 @@
 import { Structure } from "../structure";
-import { InputSearch } from "./inputSearch";
+import { InputSearch } from "./InputSearch";
 
 export class Menu {
   public readonly ulsMenu: NodeListOf<HTMLElement> = document.querySelectorAll(

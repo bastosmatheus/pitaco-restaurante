@@ -13,23 +13,23 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nanum+Brush+Script&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles/reset.css" />
-    <link rel="stylesheet" href="styles/base.css" />
-    <link rel="stylesheet" href="styles/login/login.css" />
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/login/login.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
   </head>
   <body>
     <section class="login">
       <h1 class="login__title">Login</h1>
 
-      <form action="">
+      <form>
         <div class="login__div-inputs">
-          <i class="ph-fill ph-user"></i>
+          <i class="ph-fill ph-envelope"></i>
           <input
             type="text"
-            class="login__input"
+            class="login__input email"
             name="username"
-            placeholder="Usuário"
+            placeholder="Email"
             autocomplete="off"
           />
         </div>
@@ -38,7 +38,7 @@
           <i class="ph-fill ph-lock-simple"></i>
           <input
             type="password"
-            class="login__input"
+            class="login__input password"
             name="password"
             placeholder="Senha"
             autocomplete="off"
@@ -52,5 +52,7 @@
 
       <a href="/register" class="login__link">Crie uma conta</a>
     </section>
+
+    <script type="module" src="/login/LoginUser.js"></script>
   </body>
 </html>

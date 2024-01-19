@@ -13,23 +13,46 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nanum+Brush+Script&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles/reset.css" />
-    <link rel="stylesheet" href="styles/base.css" />
-    <link rel="stylesheet" href="styles/register/register.css" />
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/register/register.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
   </head>
   <body>
     <section class="register">
       <h1 class="register__title">Cadastro</h1>
 
-      <form action="">
+      <form>
         <div class="register__div-inputs">
           <i class="ph-fill ph-user"></i>
           <input
             type="text"
-            class="register__input"
+            class="register__input name"
+            name="name"
+            placeholder="Nome"
+            34
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="register__div-inputs">
+          <i class="ph-fill ph-user"></i>
+          <input
+            type="text"
+            class="register__input lastname"
+            name="lastname"
+            placeholder="Sobrenome"
+            autocomplete="off"
+          />
+        </div>
+
+        <div class="register__div-inputs">
+          <i class="ph-fill ph-user-focus"></i>
+          <input
+            type="text"
+            class="register__input username"
             name="username"
-            placeholder="Usuário"
+            placeholder="Nome de usuário"
             autocomplete="off"
           />
         </div>
@@ -38,7 +61,7 @@
           <i class="ph-fill ph-envelope"></i>
           <input
             type="email"
-            class="register__input"
+            class="register__input email"
             name="email"
             placeholder="Email"
             autocomplete="off"
@@ -49,7 +72,7 @@
           <i class="ph-fill ph-lock-simple"></i>
           <input
             type="password"
-            class="register__input"
+            class="register__input password"
             name="password"
             placeholder="Senha"
             autocomplete="off"
@@ -59,7 +82,6 @@
         <input type="submit" value="Cadastrar" />
       </form>
     </section>
-
-    <script src="/frontend/dist/register.js"></script>
+    <script type="module" src="/register/RegisterUser.js"></script>
   </body>
 </html>

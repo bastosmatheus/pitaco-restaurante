@@ -5,18 +5,26 @@ import jwt from "jsonwebtoken";
 
 class UserController {
   public async createUser(req: Request, res: Response): Promise<Response | undefined> {
-    const { username, email, password } = req.body;
+    const { name, lastname, username, email, password } = req.body;
 
-    if (!username) {
+    if (!name) {
       return res.status(422).json({ message: "O campo de nome é obrigatório" });
     }
 
+    if (!lastname) {
+      return res.status(200).json({ message: "O campo de sobrenome é obrigatório" });
+    }
+
+    if (!username) {
+      return res.status(200).json({ message: "O campo de nome é obrigatório" });
+    }
+
     if (!email) {
-      return res.status(422).json({ message: "O campo de email é obrigatório" });
+      return res.status(200).json({ message: "O campo de email é obrigatório" });
     }
 
     if (!password) {
-      return res.status(422).json({ message: "O campo de senha é obrigatório" });
+      return res.status(200).json({ message: "O campo de senha é obrigatório" });
     }
 
     const userExists = await User.findOne({ email: email });
@@ -29,14 +37,18 @@ class UserController {
     const passwordHash = await bcrypt.hash(password, salt);
 
     const newUser = {
-      username: username,
-      email: email,
+      name,
+      lastname,
+      username,
+      email,
       password: passwordHash,
     };
 
     const user = User.create(newUser);
 
-    return res.status(201).json({ message: "o usuário foi criado com sucesso", user: newUser });
+    return res.status(201).json({
+      message: "O usuário foi criado com sucesso",
+    });
   }
 
   public async loginUser(req: Request, res: Response) {
@@ -53,7 +65,7 @@ class UserController {
     const user = await User.findOne({ email: email });
 
     if (!user) {
-      return res.status(404).json({ message: "Usuário não encontrado" });
+      return res.status(404).json({ message: "E-mail inválido" });
     }
 
     const checkPassword = await bcrypt.compare(password, user.password);
