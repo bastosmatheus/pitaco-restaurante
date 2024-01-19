@@ -23,26 +23,15 @@ class FoodController {
   }
 
   public async createDish(req: Request, res: Response): Promise<Response> {
-    const {
-      nameDish,
-      image,
-      value,
-      ingredients,
-      servesHowManyPeople,
-      description,
-      category,
-      weight,
-    } = req.body;
+    const { nameDish, image, value, servesHowManyPeople, description, category } = req.body;
 
     const newDish = {
       nameDish: nameDish,
       image: image,
       value: value,
-      ingredients: ingredients,
       servesHowManyPeople: servesHowManyPeople,
       description: description,
       category: category,
-      weight: weight,
     };
 
     const dish = await Food.create(newDish);
