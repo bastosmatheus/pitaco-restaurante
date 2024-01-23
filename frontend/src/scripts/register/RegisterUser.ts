@@ -1,33 +1,24 @@
+import { z } from "zod";
+
 class RegisterUser {
-  private inputName: HTMLInputElement = document.querySelector(
-    ".register__input.name"
-  ) as HTMLInputElement;
-  private inputLastname: HTMLInputElement = document.querySelector(
-    ".register__input.lastname"
-  ) as HTMLInputElement;
-  private inputUsername: HTMLInputElement = document.querySelector(
-    ".register__input.username"
-  ) as HTMLInputElement;
-  private inputEmail: HTMLInputElement = document.querySelector(
-    ".register__input.email"
-  ) as HTMLInputElement;
-  private inputPassword: HTMLInputElement = document.querySelector(
-    ".register__input.password"
-  ) as HTMLInputElement;
-  private form: HTMLFormElement = document.querySelector("form") as HTMLFormElement;
+  private inputs = document.querySelectorAll(".register__input") as NodeListOf<HTMLInputElement>;
+  private spansError = document.querySelectorAll(".register__error") as NodeListOf<HTMLSpanElement>;
+  private form = document.querySelector("form") as HTMLFormElement;
 
   public register() {
     this.form.addEventListener("submit", (event: Event) => {
       event.preventDefault();
 
+      const [inputName, inputLastname, inputUsername, inputEmail, inputPassword] = this.inputs;
+
       fetch("http://localhost:3000/register", {
         method: "POST",
         body: JSON.stringify({
-          name: this.inputName.value,
-          lastname: this.inputLastname.value,
-          username: this.inputUsername.value,
-          email: this.inputEmail.value,
-          password: this.inputPassword.value,
+          name: inputName.value,
+          lastname: inputLastname.value,
+          username: inputUsername.value,
+          email: inputEmail.value,
+          password: inputPassword.value,
         }),
         headers: {
           "content-type": "application/json; charset=utf-8",
@@ -35,12 +26,97 @@ class RegisterUser {
       })
         .then((r) => r.json())
         .then((data) => {
-          console.log(data);
-          if (data.message === "O usuário foi criado com sucesso") {
+          this.resetSpanAndDivInputStyle();
+
+          const validation = this.inputsValidation(
+            inputName,
+            inputLastname,
+            inputUsername,
+            inputEmail,
+            inputPassword,
+            data
+          );
+
+          if (!validation.success) {
+            const errors = validation.error.issues;
+
+            this.inputs.forEach((input) => {
+              const idInput = input.id;
+              const divInput = input.parentElement as HTMLDivElement;
+              const spanError = divInput.nextElementSibling as HTMLSpanElement;
+
+              errors.forEach((error) => {
+                if (error.path[0] === idInput) {
+                  this.addErrorMessageInSpanAndStyling(spanError, divInput, error.message);
+                }
+              });
+            });
+          }
+
+          if (validation.success) {
             window.location.replace("/login");
           }
         })
         .catch((error) => console.log(error));
+    });
+  }
+
+  private inputsValidation(
+    name: HTMLInputElement,
+    lastname: HTMLInputElement,
+    username: HTMLInputElement,
+    email: HTMLInputElement,
+    password: HTMLInputElement,
+    data: unknown
+  ) {
+    const userSchema = z.object({
+      name: z.string().min(3, { message: "O nome deve conter pelo menos 3 caracteres" }),
+      lastname: z.string().min(3, { message: "O sobrenome deve conter pelo menos 3 caracteres" }),
+      username: z
+        .string()
+        .min(3, { message: "O nome de usuário deve conter pelo menos 3 caracteres" }),
+      email: z
+        .string()
+        .email({ message: "Informe um email válido" })
+        .superRefine((_, ctx) => {
+          if (data.message === "Email já está em uso") {
+            ctx.addIssue({
+              code: z.ZodIssueCode.custom,
+              message: "Email já está em uso",
+            });
+          }
+        }),
+      password: z.string().min(6, { message: "O número minimo de caracteres para uma senha é 6" }),
+    });
+
+    const result = userSchema.safeParse({
+      name: name.value,
+      lastname: lastname.value,
+      username: username.value,
+      email: email.value,
+      password: password.value,
+    });
+
+    return result;
+  }
+
+  private addErrorMessageInSpanAndStyling(
+    spanError: HTMLSpanElement,
+    divInput: HTMLDivElement,
+    messageError: string
+  ) {
+    spanError.textContent = `${messageError}`;
+    divInput.style.border = "2px solid red";
+  }
+
+  private resetSpanAndDivInputStyle() {
+    this.inputs.forEach((input) => {
+      const divInput = input.parentElement as HTMLDivElement;
+      divInput.style.border = "2px solid transparent";
+    });
+
+    this.spansError.forEach((span) => {
+      span.textContent = "";
     });
   }
 }

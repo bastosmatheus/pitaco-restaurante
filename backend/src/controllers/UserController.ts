@@ -16,7 +16,7 @@ class UserController {
     }
 
     if (!username) {
-      return res.status(200).json({ message: "O campo de nome é obrigatório" });
+      return res.status(200).json({ message: "O campo de nome de usuário é obrigatório" });
     }
 
     if (!email) {
@@ -65,7 +65,7 @@ class UserController {
     const user = await User.findOne({ email: email });
 
     if (!user) {
-      return res.status(404).json({ message: "E-mail inválido" });
+      return res.status(404).json({ message: "Email inválido" });
     }
 
     const checkPassword = await bcrypt.compare(password, user.password);
