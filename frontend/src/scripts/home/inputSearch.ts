@@ -7,18 +7,32 @@ export class InputSearch {
     this.inputSearch.addEventListener("input", () => {
       const divCategory = li.parentElement?.parentElement as HTMLElement;
       const divFirstColumn = li.querySelector(".menu__first-column") as HTMLElement;
-      const h2NameDish = divFirstColumn.querySelector(".menu__name-dish") as HTMLElement;
+      const h2NameDish = divFirstColumn.querySelector(".menu__name-dish") as HTMLHeadingElement;
       const textNameDish = h2NameDish.textContent?.toLowerCase();
 
-      if (this.inputSearch.value != "") {
-        const valorInput = this.inputSearch.value.toLowerCase();
+      if (this.inputSearch.value !== "") {
+        const allLis = divCategory.querySelectorAll("li") as NodeListOf<HTMLLIElement>;
+        const allLisHide = divCategory.querySelectorAll("li.hide") as NodeListOf<HTMLLIElement>;
 
-        if (!textNameDish?.includes(valorInput)) return divCategory.classList.add("hide");
+        if (allLis.length === allLisHide.length) {
+          divCategory.classList.add("hide");
+        } else {
+          divCategory.classList.remove("hide");
+        }
 
-        return divCategory.classList.remove("hide");
+        const inputValue = this.inputSearch.value.toLowerCase();
+
+        if (!textNameDish?.includes(inputValue)) {
+          return li.classList.add("hide");
+        }
+
+        return li.classList.remove("hide");
       }
 
-      if (this.inputSearch.value === "") return divCategory.classList.remove("hide");
+      if (this.inputSearch.value === "") {
+        divCategory.classList.remove("hide");
+        return li.classList.remove("hide");
+      }
     });
   }
 }
