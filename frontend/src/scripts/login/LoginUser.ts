@@ -11,70 +11,74 @@ class LoginUser {
 
       const [inputEmail, inputPassword] = this.inputs;
 
-      fetch("http://localhost:3000/login", {
-        method: "POST",
-        body: JSON.stringify({
-          email: inputEmail.value,
-          password: inputPassword.value,
-        }),
-        headers: {
-          "content-type": "application/json; charset=utf-8",
-        },
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          this.resetSpanAndDivInputStyle();
+      this.resetSpanAndDivInputStyle();
 
-          const validation = this.inputsValidation(inputEmail, inputPassword, data);
+      const validation = this.inputsValidation(inputEmail, inputPassword);
 
-          if (!validation.success) {
-            const errors = validation.error.issues;
+      if (!validation.success) {
+        const errors = validation.error.issues;
 
-            this.inputs.forEach((input) => {
-              const idInput = input.id;
-              const divInput = input.parentElement as HTMLDivElement;
+        this.inputs.forEach((input) => {
+          const idInput = input.id;
+          const divInput = input.parentElement as HTMLDivElement;
+          const spanError = divInput.nextElementSibling as HTMLSpanElement;
+
+          errors.forEach((error) => {
+            if (error.path[0] === idInput) {
+              this.addErrorMessageInSpanAndStyling(spanError, divInput, error.message);
+            }
+          });
+        });
+      }
+
+      if (validation.success) {
+        fetch("http://localhost:3000/login", {
+          method: "POST",
+          body: JSON.stringify({
+            email: inputEmail.value,
+            password: inputPassword.value,
+          }),
+          headers: {
+            "content-type": "application/json; charset=utf-8",
+          },
+        })
+          .then((r) => r.json())
+          .then((data: unknown) => {
+            if (data.message === "Email inválido") {
+              const divInput = inputEmail.parentElement as HTMLDivElement;
               const spanError = divInput.nextElementSibling as HTMLSpanElement;
 
-              errors.forEach((error) => {
-                if (error.path[0] === idInput) {
-                  this.addErrorMessageInSpanAndStyling(spanError, divInput, error.message);
-                }
-              });
-            });
-          }
+              divInput.style.border = "2px solid red";
+              spanError.textContent = data.message;
+              return;
+            }
 
-          if (validation.success) {
-            window.location.replace("/");
-          }
-        })
-        .catch((error) => console.log(error));
+            if (data.message === "Senha inválida") {
+              const divInput = inputPassword.parentElement as HTMLDivElement;
+              const spanError = divInput.nextElementSibling as HTMLSpanElement;
+
+              divInput.style.border = "2px solid red";
+              spanError.textContent = data.message;
+              return;
+            }
+
+            localStorage.setItem("token", data.token);
+
+            const token = localStorage.getItem("token") || "";
+
+            fetch("http://localhost:8000/admin/dashboard", {
+              headers: { authorization: token },
+            });
+          })
+          .catch((error) => console.log(error));
+      }
     });
   }
 
-  private inputsValidation(email: HTMLInputElement, password: HTMLInputElement, data: unknown) {
+  private inputsValidation(email: HTMLInputElement, password: HTMLInputElement) {
     const userSchema = z.object({
-      email: z
-        .string()
-        .email({ message: "Informe um email válido" })
-        .superRefine((_, ctx) => {
-          if (data.message === "Email inválido") {
-            ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              message: "Email inválido",
-            });
-          }
-        }),
-      password: z
-        .string()
-        .nonempty({ message: "Preencha o campo de senha" })
-        .superRefine((_, ctx) => {
-          if (data.message === "Senha inválida") {
-            ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              message: "Senha inválida",
-            });
-          }
-        }),
+      email: z.string().email({ message: "Informe um email válido" }),
+      password: z.string().nonempty({ message: "Preencha o campo de senha" }),
     });
 
     const result = userSchema.safeParse({

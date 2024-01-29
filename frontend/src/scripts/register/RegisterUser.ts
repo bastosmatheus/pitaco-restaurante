@@ -11,53 +11,70 @@ class RegisterUser {
 
       const [inputName, inputLastname, inputUsername, inputEmail, inputPassword] = this.inputs;
 
-      fetch("http://localhost:3000/register", {
-        method: "POST",
-        body: JSON.stringify({
-          name: inputName.value,
-          lastname: inputLastname.value,
-          username: inputUsername.value,
-          email: inputEmail.value,
-          password: inputPassword.value,
-        }),
-        headers: {
-          "content-type": "application/json; charset=utf-8",
-        },
-      })
-        .then((r) => r.json())
-        .then((data) => {
-          this.resetSpanAndDivInputStyle();
+      this.resetSpanAndDivInputStyle();
 
-          const validation = this.inputsValidation(
-            inputName,
-            inputLastname,
-            inputUsername,
-            inputEmail,
-            inputPassword,
-            data
-          );
+      const validation = this.inputsValidation(
+        inputName,
+        inputLastname,
+        inputUsername,
+        inputEmail,
+        inputPassword
+      );
 
-          if (!validation.success) {
-            const errors = validation.error.issues;
+      if (!validation.success) {
+        const errors = validation.error.issues;
 
-            this.inputs.forEach((input) => {
-              const idInput = input.id;
-              const divInput = input.parentElement as HTMLDivElement;
+        this.inputs.forEach((input) => {
+          const idInput = input.id;
+          const divInput = input.parentElement as HTMLDivElement;
+          const spanError = divInput.nextElementSibling as HTMLSpanElement;
+
+          errors.forEach((error) => {
+            if (error.path[0] === idInput) {
+              this.addErrorMessageInSpanAndStyling(spanError, divInput, error.message);
+            }
+          });
+        });
+      }
+
+      if (validation.success) {
+        fetch("http://localhost:3000/register", {
+          method: "POST",
+          body: JSON.stringify({
+            name: inputName.value,
+            lastname: inputLastname.value,
+            username: inputUsername.value,
+            email: inputEmail.value,
+            password: inputPassword.value,
+          }),
+          headers: {
+            "content-type": "application/json; charset=utf-8",
+          },
+        })
+          .then((r) => r.json())
+          .then((data: unknown) => {
+            if (data.message === "Username já está em uso") {
+              const divInput = inputUsername.parentElement as HTMLDivElement;
               const spanError = divInput.nextElementSibling as HTMLSpanElement;
 
-              errors.forEach((error) => {
-                if (error.path[0] === idInput) {
-                  this.addErrorMessageInSpanAndStyling(spanError, divInput, error.message);
-                }
-              });
-            });
-          }
+              divInput.style.border = "2px solid red";
+              spanError.textContent = data.message;
+              return;
+            }
 
-          if (validation.success) {
+            if (data.message === "Email já está em uso") {
+              const divInput = inputEmail.parentElement as HTMLDivElement;
+              const spanError = divInput.nextElementSibling as HTMLSpanElement;
+
+              divInput.style.border = "2px solid red";
+              spanError.textContent = data.message;
+              return;
+            }
+
             window.location.replace("/login");
-          }
-        })
-        .catch((error) => console.log(error));
+          })
+          .catch((error) => console.log(error));
+      }
     });
   }
 
@@ -66,8 +83,7 @@ class RegisterUser {
     lastname: HTMLInputElement,
     username: HTMLInputElement,
     email: HTMLInputElement,
-    password: HTMLInputElement,
-    data: unknown
+    password: HTMLInputElement
   ) {
     const userSchema = z.object({
       name: z.string().min(3, { message: "O nome deve conter pelo menos 3 caracteres" }),
@@ -75,17 +91,7 @@ class RegisterUser {
       username: z
         .string()
         .min(3, { message: "O nome de usuário deve conter pelo menos 3 caracteres" }),
-      email: z
-        .string()
-        .email({ message: "Informe um email válido" })
-        .superRefine((_, ctx) => {
-          if (data.message === "Email já está em uso") {
-            ctx.addIssue({
-              code: z.ZodIssueCode.custom,
-              message: "Email já está em uso",
-            });
-          }
-        }),
+      email: z.string().email({ message: "Informe um email válido" }),
       password: z.string().min(6, { message: "O número minimo de caracteres para uma senha é 6" }),
     });
 

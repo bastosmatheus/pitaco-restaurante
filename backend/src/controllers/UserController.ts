@@ -19,6 +19,12 @@ class UserController {
       return res.status(200).json({ message: "O campo de nome de usuário é obrigatório" });
     }
 
+    const usernameExists = await User.findOne({ username: username });
+
+    if (usernameExists) {
+      return res.status(422).json({ message: "Username já está em uso" });
+    }
+
     if (!email) {
       return res.status(200).json({ message: "O campo de email é obrigatório" });
     }
@@ -74,7 +80,9 @@ class UserController {
       return res.status(422).json({ message: "Senha inválida" });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_PASS ?? "");
+    const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_PASS ?? "", {
+      expiresIn: "3h",
+    });
 
     return res.status(200).json({ message: "Autenticação realizada com sucesso", token: token });
   }
