@@ -17,71 +17,74 @@
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/base.css" />
     <link rel="stylesheet" href="/styles/sidebar.css" />
-    <link rel="stylesheet" href="/styles/dashboard/main-content.css" />
+    <link rel="stylesheet" href="/styles/dashboard/header.css" />
+    <link rel="stylesheet" href="/styles/dashboard/dashboard.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
   </head>
   <body>
-    <main>
-      <aside class="sidebar">
-        <img
-          class="sidebar__img"
-          src="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
-          alt="logo pitaco restaurante"
-        />
-        <h3 class="sidebar__title-section">Executivo dos clientes</h3>
-        <ul class="sidebar__list">
-          <li class="sidebar__item">
-            <a href="/dashboard" class="sidebar__link">
-              <i class="ph ph-squares-four"></i>
+    <header class="header">
+      <img
+        class="header__img"
+        src="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
+        alt="logo do restaurante pitaco"
+        title="logo do restaurante pitaco"
+      />
+      <i class="ph-bold ph-list"></i>
+      <nav class="header__nav">
+        <ul class="header__list">
+          <i class="ph-bold ph-x"></i>
+          <li class="header__item">
+            <img
+              src="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
+              alt="logo do pitaco"
+              class="header__img"
+            />
+          </li>
+          <li class="header__item">
+            <a class="header__link" href="/">
+              <i class="ph-light ph-house"></i>
+              Inicio
+            </a>
+          </li>
+          <li class="header__item">
+            <a class="header__link admin" href="/admin/dashboard">
+              <i class="ph-light ph-chalkboard-teacher"></i>
               Dashboard
             </a>
           </li>
-          <li class="sidebar__item">
-            <a href="/menu" class="sidebar__link">
-              <i class="ph ph-cooking-pot"></i>
+          <li class="header__item">
+            <a class="header__link admin" href="/admin/menu">
+              <i class="ph ph-fork-knife"></i>
               Cardápio
             </a>
           </li>
         </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="dashboard">
+        <h1 class="dashboard__title">Dashboard</h1>
 
-        <div class="sidebar__user">
-          <img
-            src="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
-            alt=""
-            class="sidebar__user-img"
-          />
-          <span class="sidebar__name">Matheus Bastos</span>
-          <i class="ph ph-sign-out"></i>
-        </div>
-      </aside>
-      <article class="main-content">
-        <header class="main-content__header">
-          <h1 class="main-content__title">Dashboard</h1>
-
-          <div class="main-content__icons">
-            <i class="ph ph-sun"></i>
-            <i class="ph ph-house"></i>
-          </div>
-        </header>
-
-        <section class="main-content__dashboard">
-          <span class="main-content__select">Esse mês</span>
-          <i class="ph ph-caret-down"></i>
-
-          <section class="main-content__orders">
-            <ul class="main-content__list">
-              <li class="main-content__item">
-                <h3 class="main-content__title-card">N° de pedidos</h3>
-                <span class="main-content__statistic-card">250</span>
-              </li>
-              <li class="main-content__item">
-                <h3 class="main-content__title-card">Pratos novos</h3>
-                <span class="main-content__statistic-card">3</span>
-              </li>
-            </ul>
-          </section>
-        </section>
-      </article>
+        <ul class="dashboard__list">
+          <li class="dashboard__item">
+            <div class="dashboard__box-card">
+              <h3 class="dashboard__title-card">Receita total (R$)</h3>
+              <i class="ph-bold ph-currency-dollar"></i>
+            </div>
+            <span class="dashboard__price">R$ </span>
+          </li>
+          <li class="dashboard__item">
+            <div class="dashboard__box-card">
+              <h3 class="dashboard__title-card">Pedidos (mês)</h3>
+              <i class="ph-bold ph-fork-knife"></i>
+            </div>
+            <span class="dashboard__price">R$ </span>
+          </li>
+        </ul>
+      </section>
     </main>
+
+    <script type="module" src="/TagsA.js"></script>
+    <script type="module" src="/Hamburger.js"></script>
   </body>
 </html>
