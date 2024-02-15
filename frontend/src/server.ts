@@ -43,4 +43,16 @@ app.get("/admin/menu/:token", AuthMiddleware.verifyToken, (req, res) => {
   res.sendFile(__dirname + "/pages/menu.html");
 });
 
+app.get("/admin/menu/adddish/:token", AuthMiddleware.verifyToken, (req, res) => {
+  res.sendFile(__dirname + "/pages/adddish.html");
+});
+
+app.get("/admin/menu/editdish/:token", AuthMiddleware.verifyToken, (req, res) => {
+  res.sendFile(__dirname + "/pages/editdish.html");
+});
+
+app.get("/admin/menu/removedish/:token", AuthMiddleware.verifyToken, (req, res) => {
+  res.sendFile(__dirname + "/pages/removedish.html");
+});
+
 app.listen(8000);

@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
-import jwt from "jsonwebtoken";
 import { ObjectId } from "mongoose";
+import jwt from "jsonwebtoken";
 
 type JwtPayload = {
   id: ObjectId;
@@ -9,16 +9,26 @@ type JwtPayload = {
 
 class AuthMiddleware {
   public async verifyToken(req: Request, res: Response, next: NextFunction) {
-    const token = req.headers.authorization;
+    const { token } = req.params;
 
     if (!token || token === "") {
-      return res.status(401).json({ message: "Usuário não autorizado" });
+      return res.redirect("/login");
     }
 
-    const { id, isAdmin } = jwt.verify(token, process.env.JWT_PASS ?? "") as JwtPayload;
+    if (typeof token === "string") {
+      const verifiedToken = jwt.verify(token, process.env.JWT_PASS || "", (err) => {
+        if (err) {
+          return res.redirect("/register");
+        }
 
-    if (!isAdmin) {
-      return res.status(401).json({ message: "Usuário não autorizado" });
+        return jwt.decode(token) as JwtPayload;
+      });
+
+      if (verifiedToken !== undefined) {
+        if (!verifiedToken.isAdmin) {
+          return res.redirect("/");
+        }
+      }
     }
 
     next();
