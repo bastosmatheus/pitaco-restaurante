@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nanum+Brush+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/cart/header.css" />
+    <link rel="stylesheet" href="/styles/cart/cart.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <title>Carrinho | Pitaco Restaurante</title>
+  </head>
+  <body>
+    <header class="header">
+      <a href="/" class="header__link">
+        <i class="ph-bold ph-caret-left"></i>
+        Home
+      </a>
+    </header>
+    <main>
+      <section class="cart">
+        <h2 class="cart__title">Carrinho de compras</h2>
+        <span class="cart__quantity-items"></span>
+        <div class="cart__dishes"></div>
+        <ul class="cart__list-prices">
+          <li class="cart__item-prices">
+            Taxa de entrega
+            <h3 class="cart__price-order">R$ <span class="cart__value"></span></h3>
+          </li>
+          <li class="cart__item-prices">
+            Total dos pratos
+            <h3 class="cart__price-order">R$ <span class="cart__value"></span></h3>
+          </li>
+          <li class="cart__item-prices">
+            Total do pedido
+            <h3 class="cart__price-order">R$ <span class="cart__value"></span></h3>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <script type="module" src="/cart/RenderDishes.js"></script>
+    <script type="module" src="/cart/QuantityOfOrders.js"></script>
+  </body>
+</html>
