@@ -4,7 +4,6 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import { connection } from "./db/connection";
 import { routerFood } from "./routes/FoodRouter";
-import { routerOrders } from "./routes/OrdersRouter";
 import { routerUsers } from "./routes/UserRouter";
 
 const app = express();
@@ -15,7 +14,6 @@ app.use(cors());
 app.use(jsonBodyParser);
 app.use(urlParser);
 app.use(routerFood);
-app.use(routerOrders);
 app.use(routerUsers);
 
 const port = process.env.PORT;

@@ -6,9 +6,9 @@ const FoodSchema = new mongoose.Schema({
   value: { type: Number, required: true },
   servesHowManyPeople: { type: Number, required: true },
   description: { type: String, required: true },
-  category: { type: String, required: false },
+  category: { type: String, required: true },
 });
 
 const Food = mongoose.model("Foods", FoodSchema);
 
-export { Food };
+export { Food, FoodSchema };

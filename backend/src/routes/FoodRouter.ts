@@ -3,10 +3,11 @@ import FoodController from "../controllers/FoodController";
 
 const routerFood = Router();
 
-routerFood.get("/alldishs", FoodController.getAllDishs);
-routerFood.get("/dish/:id", FoodController.getDishById);
-routerFood.post("/dish", FoodController.createDish);
-routerFood.delete("/dish/:id", FoodController.deleteDish);
-routerFood.put("/dish/:id", FoodController.updateDish);
+routerFood.get("/dishes", FoodController.getAllDishes);
+routerFood.get("/dishes/:id", FoodController.getDishById);
+routerFood.post("/dishes", FoodController.createDish);
+routerFood.post("/dishes/dishexists", FoodController.dishExists);
+routerFood.delete("/dishes/:id", FoodController.deleteDish);
+routerFood.put("/dishes/:id", FoodController.updateDish);
 
 export { routerFood };
