@@ -1,38 +1,27 @@
 import { z } from "zod";
+import { ErrorAndModalStyling } from "../ErrorAndModalStyling";
+import { ReponseToken, ResponseDefault } from "../@types/types";
 
-class LoginUser {
-  private inputs = document.querySelectorAll(".login__input") as NodeListOf<HTMLInputElement>;
-  private spansError = document.querySelectorAll(".login__error") as NodeListOf<HTMLSpanElement>;
-  private form = document.querySelector("form") as HTMLFormElement;
+class LoginUser extends ErrorAndModalStyling {
+  constructor(
+    protected inputs: NodeListOf<HTMLInputElement>,
+    protected spansError: NodeListOf<HTMLSpanElement>
+  ) {
+    super(inputs, spansError);
+  }
 
   public login() {
-    this.form.addEventListener("submit", (event: Event) => {
+    const form = document.querySelector("form") as HTMLFormElement;
+
+    form.addEventListener("submit", (event: Event) => {
       event.preventDefault();
 
       const [inputEmail, inputPassword] = this.inputs;
 
-      this.resetSpanAndDivInputStyle();
-
       const validation = this.inputsValidation(inputEmail, inputPassword);
 
-      if (!validation.success) {
-        const errors = validation.error.issues;
-
-        this.inputs.forEach((input) => {
-          const idInput = input.id;
-          const divInput = input.parentElement as HTMLDivElement;
-          const spanError = divInput.nextElementSibling as HTMLSpanElement;
-
-          errors.forEach((error) => {
-            if (error.path[0] === idInput) {
-              this.addErrorMessageInSpanAndStyling(spanError, divInput, error.message);
-            }
-          });
-        });
-      }
-
       if (validation.success) {
-        fetch("http://localhost:3000/login", {
+        fetch("http://localhost:3000/user/login", {
           method: "POST",
           body: JSON.stringify({
             email: inputEmail.value,
@@ -42,40 +31,39 @@ class LoginUser {
             "content-type": "application/json; charset=utf-8",
           },
         })
-          .then((r) => r.json())
-          .then((data: unknown) => {
-            if (data.message === "Email inválido") {
+          .then((response) => response.json())
+          .then((responseDefault: ResponseDefault & ReponseToken) => {
+            if (responseDefault.message === "Email inválido") {
               const divInput = inputEmail.parentElement as HTMLDivElement;
               const spanError = divInput.nextElementSibling as HTMLSpanElement;
 
               divInput.style.border = "2px solid red";
-              spanError.textContent = data.message;
-              return;
+              spanError.textContent = responseDefault.message;
+              return inputEmail.focus();
             }
 
-            if (data.message === "Senha inválida") {
+            if (responseDefault.message === "Senha inválida") {
               const divInput = inputPassword.parentElement as HTMLDivElement;
               const spanError = divInput.nextElementSibling as HTMLSpanElement;
 
               divInput.style.border = "2px solid red";
-              spanError.textContent = data.message;
-              return;
+              spanError.textContent = responseDefault.message;
+              return inputPassword.focus();
             }
 
-            localStorage.setItem("token", data.token);
+            localStorage.setItem("token", responseDefault.token);
 
-            const token = localStorage.getItem("token") || "";
-
-            fetch("http://localhost:8000/admin/dashboard", {
-              headers: { authorization: token },
-            });
-          })
-          .catch((error) => console.log(error));
+            window.location.replace("/");
+          });
+      } else {
+        this.errorsInValidation(validation);
       }
     });
   }
 
   private inputsValidation(email: HTMLInputElement, password: HTMLInputElement) {
+    this.resetSpanAndInputStyle();
+
     const userSchema = z.object({
       email: z.string().email({ message: "Informe um email válido" }),
       password: z.string().nonempty({ message: "Preencha o campo de senha" }),
@@ -88,27 +76,9 @@ class LoginUser {
 
     return result;
   }
-
-  private addErrorMessageInSpanAndStyling(
-    spanError: HTMLSpanElement,
-    divInput: HTMLDivElement,
-    messageError: string
-  ) {
-    spanError.textContent = `${messageError}`;
-    divInput.style.border = "2px solid red";
-  }
-
-  private resetSpanAndDivInputStyle() {
-    this.inputs.forEach((input) => {
-      const divInput = input.parentElement as HTMLDivElement;
-      divInput.style.border = "2px solid transparent";
-    });
-
-    this.spansError.forEach((span) => {
-      span.textContent = "";
-    });
-  }
 }
 
-const loginUser: LoginUser = new LoginUser();
+const inputs = document.querySelectorAll(".login__input") as NodeListOf<HTMLInputElement>;
+const spansError = document.querySelectorAll(".login__error") as NodeListOf<HTMLSpanElement>;
+const loginUser: LoginUser = new LoginUser(inputs, spansError);
 loginUser.login();
