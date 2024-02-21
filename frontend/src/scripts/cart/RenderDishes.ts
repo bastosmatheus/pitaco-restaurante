@@ -1,81 +1,92 @@
+import { CartDish, ResponseCart } from "../@types/types";
 import { Structure } from "../Structure";
-import { TotalOrder } from "./TotalOrder";
 
 class Cart {
-  private structure = new Structure();
-  private ul = this.structure.createElement("ul", { class: "cart__list" });
-  private divDishes = document.querySelector(".cart__dishes") as HTMLDivElement;
-  private spanItens = document.querySelector(".cart__quantity-items") as HTMLSpanElement;
-
   public renderDishesInCart() {
     const token = localStorage.getItem("token") || "";
 
-    fetch(`http://localhost:3000/cart/${token}`)
-      .then((r) => r.json())
-      .then((data) => {
-        this.spanItens.innerText = `${
-          data.cart.dishes.length === 1
-            ? `Você tem ${data.cart.dishes.length} item no carrinho`
-            : `Você tem ${data.cart.dishes.length} itens no carrinho`
+    fetch(`http://localhost:3000/user/cart/${token}`)
+      .then((response) => response.json())
+      .then((responseCart: ResponseCart) => {
+        const dishes = responseCart.cart.dishes;
+        const lengthCart = dishes.length;
+
+        const spanItems = document.querySelector(".cart__quantity-items") as HTMLSpanElement;
+
+        spanItems.innerText = `${
+          lengthCart === 1
+            ? `Você tem ${lengthCart} item no carrinho`
+            : `Você tem ${lengthCart} itens no carrinho`
         }`;
-        data.cart.dishes.forEach((dish: unknown) => {
+
+        dishes.forEach((dish: CartDish) => {
           this.createLiAndAddInTheList(dish);
         });
+
+        this.calculatePriceTotal();
       });
   }
 
-  private createLiAndAddInTheList(dish: unknown) {
-    const li = this.structure.createElement("li", { class: "cart__item" });
-    const imgDish = this.structure.createElement("img", {
+  private createLiAndAddInTheList(dish: CartDish) {
+    const structure = new Structure();
+
+    const ul = structure.createElement("ul", { class: "cart__list" });
+    const li = structure.createElement("li", { class: "cart__item" });
+    const imgDish = structure.createElement("img", {
       class: "cart__img",
       loading: "lazy",
     });
-    const divFirstColumn = this.structure.createElement("div", { class: "cart__second-column" });
-    const h2NameDish = this.structure.createElement("h2", { class: "cart__name-dish" });
-    const spanPrice = this.structure.createElement("span", { class: "cart__price" });
-    const divCounter = this.structure.createElement("div", { class: "cart__counter" });
-    const iconMinus = this.structure.createElement("i", { class: "ph-bold ph-minus" });
-    const inputCounter = this.structure.createElement("input", {
-      class: "cart__input-counter",
-      type: "number",
-      name: "counter",
-      id: "counter",
-      readonly: "",
-    });
-    const iconPlus = this.structure.createElement("i", { class: "ph-bold ph-plus" });
+    const divFirstColumn = structure.createElement("div", { class: "cart__second-column" });
+    const h2NameDish = structure.createElement("h2", { class: "cart__name-dish" });
+    const spanPrice = structure.createElement("span", { class: "cart__price" });
+
+    const divDishes = document.querySelector(".cart__dishes") as HTMLDivElement;
 
     li.appendChild(imgDish);
     li.appendChild(divFirstColumn);
     divFirstColumn.appendChild(h2NameDish);
     divFirstColumn.appendChild(spanPrice);
-    divFirstColumn.appendChild(divCounter);
-    divCounter.appendChild(iconMinus);
-    divCounter.appendChild(inputCounter);
-    divCounter.appendChild(iconPlus);
 
-    this.addInfosInLi(li, imgDish, h2NameDish, spanPrice, inputCounter, dish);
-
-    const totalOrder = new TotalOrder(inputCounter, spanPrice, iconPlus, iconMinus);
-    totalOrder.calculatePriceTotal();
+    this.addInfos(imgDish, h2NameDish, spanPrice, dish);
+    ul.appendChild(li);
+    divDishes.appendChild(ul);
   }
 
-  private addInfosInLi(
-    li: HTMLElement,
+  private addInfos(
     imgDish: HTMLElement,
     h2NameDish: HTMLElement,
     spanPrice: HTMLElement,
-    inputCounter: HTMLElement,
-    dish: unknown
+    dish: CartDish
   ): void {
     imgDish.setAttribute("src", dish.image);
     imgDish.setAttribute("alt", dish.nameDish);
     imgDish.setAttribute("title", dish.nameDish);
-    h2NameDish.innerText = `${dish.nameDish}`;
-    spanPrice.innerText = `R$ ${dish.value}`;
-    inputCounter.value = 1;
+    h2NameDish.innerText = `${dish.quantityOfOrder}x ${dish.nameDish}`;
+    spanPrice.innerText = `R$ ${dish.valueTotal.toFixed(2)}`;
+  }
 
-    this.ul.appendChild(li);
-    this.divDishes.appendChild(this.ul);
+  private calculatePriceTotal() {
+    const spansValue = document.querySelectorAll(".cart__value") as NodeListOf<HTMLSpanElement>;
+    const spansPriceWithSymbols = document.querySelectorAll(
+      ".cart__price"
+    ) as NodeListOf<HTMLSpanElement>;
+    const spansPriceWithoutSymbols: number[] = [];
+
+    spansPriceWithSymbols.forEach((spanPriceWithSymbol) => {
+      spansPriceWithoutSymbols.push(Number(spanPriceWithSymbol.innerText.split(" ")[1]));
+    });
+
+    const [spanDelivery, spanTotalDishes, spanTotalOrder] = spansValue;
+
+    const totalPriceOfDishes = spansPriceWithoutSymbols
+      .reduce((acc, currentValue) => acc + currentValue, 0)
+      .toFixed(2);
+
+    spanDelivery.textContent = `5.00`;
+    spanTotalDishes.textContent = `${totalPriceOfDishes}`;
+    spanTotalOrder.textContent = `${(
+      parseFloat(totalPriceOfDishes) + parseFloat(spanDelivery.textContent)
+    ).toFixed(2)}`;
   }
 }
 

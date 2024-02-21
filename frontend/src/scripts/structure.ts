@@ -1,5 +1,5 @@
 export class Structure {
-  public createElement(tagName: string, attributes: { [s: string]: unknown } | Array<unknown>) {
+  public createElement(tagName: string, attributes: { [s: string]: string } | Array<unknown>) {
     const element = document.createElement(tagName);
     const arrayAttributes = Object.entries(attributes);
 

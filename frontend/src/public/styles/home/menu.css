@@ -26,6 +26,8 @@
 
   padding: 1rem;
 
+  cursor: pointer;
+
   transition: .5s all;
 }
 
@@ -34,21 +36,18 @@
 }
 
 .menu__first-column {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   gap: 1rem;
-  align-items: center;
 
   height: 100%;
 }
 
 .menu__name-dish {
-  font-weight: 500;
-  line-height: 1.15;
+  font-weight: 700;
 
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
+  line-height: 1.15;
 }
 
 .menu__dish-description {
@@ -70,12 +69,15 @@
 
 .menu__price {
   color: var(--green);
+
+  font-weight: 600;
 }
 
 .menu__img {
   border-radius: .5rem;
 
-  max-width: 6rem;
+  width: 40%;
+  max-width: 10rem;
 }
 
 .hide {

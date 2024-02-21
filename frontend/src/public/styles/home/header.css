@@ -76,6 +76,17 @@
   opacity: .5;
 }
 
+.header__list .ph-x {
+  color: red;
+
+  font-size: 1.5rem;
+
+  position: absolute;
+  top: 10;
+  right: 23px;
+  z-index: 10;
+}
+
 .header__list .header__item {
   text-align: center;
 }

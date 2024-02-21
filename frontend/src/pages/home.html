@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/styles/home/search.css" />
     <link rel="stylesheet" href="/styles/home/categories.css" />
     <link rel="stylesheet" href="/styles/home/menu.css" />
+    <link rel="stylesheet" href="/styles/home/modal.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <title>Pitaco Restaurante</title>
   </head>
@@ -42,13 +43,25 @@
             />
           </li>
           <li class="header__item">
-            <a class="header__link" href="/cart">
+            <a class="header__link href" href="/cart">
               <i class="ph-light ph-shopping-cart"></i>
               Carrinho
             </a>
           </li>
           <li class="header__item">
-            <a class="header__link">
+            <a class="header__link href" href="/admin/dashboard">
+              <i class="ph-light ph-chalkboard-teacher"></i>
+              Dashboard
+            </a>
+          </li>
+          <li class="header__item">
+            <a class="header__link href" href="/admin/menu">
+              <i class="ph ph-fork-knife"></i>
+              Cardápio
+            </a>
+          </li>
+          <li class="header__item">
+            <a class="header__link exit" href="/login">
               <i class="ph-light ph-sign-out"></i>
               Sair
             </a>
@@ -97,25 +110,55 @@
       <section class="menu">
         <div class="menu__category">
           <h3 class="menu__title">Os mais vendidos!</h3>
-          <ul class="menu__list" id="mais-vendidos"></ul>
+          <ul class="menu__list" id="mais vendidos"></ul>
         </div>
         <div class="menu__category">
           <h3 class="menu__title">Match perfeito</h3>
-          <ul class="menu__list" id="match-perfeito"></ul>
+          <ul class="menu__list" id="match perfeito"></ul>
         </div>
         <div class="menu__category">
           <h3 class="menu__title">Menu premium</h3>
-          <ul class="menu__list" id="menu-premium"></ul>
+          <ul class="menu__list" id="menu premium"></ul>
         </div>
         <div class="menu__category">
           <h3 class="menu__title">Bebidas</h3>
           <ul class="menu__list" id="bebidas"></ul>
         </div>
       </section>
+      <section class="modal-background">
+        <div class="modal">
+          <img src="" alt="" class="modal__img" />
+          <i class="ph-bold ph-x"></i>
+          <div class="modal__first-column">
+            <h2 class="modal__name-dish"></h2>
+            <p class="modal__dish-description"></p>
+            <span class="modal__serves-how-many-people"></span>
+            <span class="modal__price"></span>
+
+            <div class="modal__action">
+              <div class="modal__counter">
+                <button class="modal__button-counter decrement" type="button">
+                  <i class="ph-bold ph-minus"></i>
+                </button>
+                <span class="modal__number">1</span>
+                <button class="modal__button-counter increment" type="button">
+                  <i class="ph-bold ph-plus"></i>
+                </button>
+              </div>
+              <button class="modal__button-add-dish" type="button">
+                <span>Adicionar</span>
+                <h3 class="modal__value">R$ <span class="modal__total-price"></span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
 
+    <script type="module" src="/Hamburger.js"></script>
+    <script type="module" src="/TagsA.js"></script>
     <script type="module" src="/home/Menu.js"></script>
     <script type="module" src="/home/InputSearch.js"></script>
-    <script type="module" src="/home/Hamburger.js"></script>
+    <script type="module" src="/home/Exit.js"></script>
   </body>
 </html>
