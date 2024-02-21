@@ -1,9 +1,9 @@
-import { Food } from "../models/Food";
+import { Dish } from "../models/Dish";
 import { Request, Response } from "express";
 
-class FoodController {
+class DishController {
   public async getAllDishes(_req: Request, res: Response): Promise<Response> {
-    const dishes = await Food.find();
+    const dishes = await Dish.find();
 
     return res.status(200).json({ type: "OK", statusCode: 200, dishes: dishes });
   }
@@ -19,7 +19,7 @@ class FoodController {
       });
     }
 
-    const dish = await Food.findById(id);
+    const dish = await Dish.findById(id);
 
     if (!dish) {
       return res.status(404).send({
@@ -83,7 +83,7 @@ class FoodController {
       });
     }
 
-    const dishExists = await Food.findOne({ nameDish: nameDish });
+    const dishExists = await Dish.findOne({ nameDish: nameDish });
 
     if (dishExists) {
       return res
@@ -100,7 +100,7 @@ class FoodController {
       category: category,
     };
 
-    const dish = await Food.create(newDish);
+    const dish = await Dish.create(newDish);
 
     if (!dish) {
       return res.status(400).json({
@@ -129,7 +129,7 @@ class FoodController {
       });
     }
 
-    const dish = await Food.findByIdAndDelete(id);
+    const dish = await Dish.findByIdAndDelete(id);
 
     if (!dish) {
       return res.status(404).send({
@@ -217,7 +217,7 @@ class FoodController {
       category: category,
     };
 
-    const dish = await Food.findByIdAndUpdate(id, newDish);
+    const dish = await Dish.findByIdAndUpdate(id, newDish);
 
     if (!dish) {
       return res.status(404).send({
@@ -246,7 +246,7 @@ class FoodController {
       });
     }
 
-    const dish = await Food.findOne({ nameDish: nameDish });
+    const dish = await Dish.findOne({ nameDish: nameDish });
 
     if (!dish) {
       return res
@@ -263,4 +263,4 @@ class FoodController {
   }
 }
 
-export default new FoodController();
+export default new DishController();

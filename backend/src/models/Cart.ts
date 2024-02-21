@@ -1,10 +1,7 @@
 import mongoose from "mongoose";
-import { FoodSchema } from "./Food";
 
 const CartSchema = new mongoose.Schema({
-  dishes: [FoodSchema],
+  dishes: [{ nameDish: String, image: String, valueTotal: Number, quantityOfOrder: Number }],
 });
 
-const Cart = mongoose.model("Carts", CartSchema);
-
-export { Cart, CartSchema };
+export { CartSchema };

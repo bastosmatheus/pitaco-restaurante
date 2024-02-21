@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const FoodSchema = new mongoose.Schema({
+const DishSchema = new mongoose.Schema({
   nameDish: { type: String, required: true },
   image: { type: String, required: true },
   value: { type: Number, required: true },
@@ -9,6 +9,6 @@ const FoodSchema = new mongoose.Schema({
   category: { type: String, required: true },
 });
 
-const Food = mongoose.model("Foods", FoodSchema);
+const Dish = mongoose.model("Dishes", DishSchema);
 
-export { Food, FoodSchema };
+export { Dish, DishSchema };

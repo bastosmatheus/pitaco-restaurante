@@ -83,7 +83,7 @@ class UserController {
       password: passwordHash,
     };
 
-    const user = User.create(newUser);
+    const user = await User.create(newUser);
 
     if (!user) {
       return res.status(400).json({
@@ -148,7 +148,7 @@ class UserController {
     });
   }
 
-  public async addItemsInCart(req: Request, res: Response): Promise<Response> {
+  public async addDishesInCart(req: Request, res: Response): Promise<Response> {
     const { token } = req.params;
 
     if (!token || token === "") {
@@ -175,11 +175,11 @@ class UserController {
         .json({ message: "Usuário não encontrado", type: "Not Found", statusCode: 404 });
     }
 
-    const { nameDish, image, value, servesHowManyPeople, description, category } = req.body;
+    const { nameDish, image, valueTotal, quantityOfOrder } = req.body;
 
     if (!nameDish || nameDish === "") {
       return res.status(422).json({
-        message: "O campo de nome é obrigatório",
+        message: "O nome do prato é obrigatório",
         type: " Entity Entity",
         statusCode: 422,
       });
@@ -187,39 +187,23 @@ class UserController {
 
     if (!image || image === "") {
       return res.status(422).json({
-        message: "O campo de imagem é obrigatório",
+        message: "A imagem é obrigatório",
         type: "Unprocessable Entity",
         statusCode: 422,
       });
     }
 
-    if (!value || value === "") {
+    if (!valueTotal || valueTotal === "") {
       return res.status(422).json({
-        message: "O campo de valor é obrigatório",
+        message: "O valor total é obrigatório",
         type: "Unprocessable Entity",
         statusCode: 422,
       });
     }
 
-    if (!servesHowManyPeople || servesHowManyPeople === "") {
+    if (!quantityOfOrder || quantityOfOrder === "") {
       return res.status(422).json({
-        message: "O campo de quantas pessoas o prato serve é obrigatório",
-        type: "Unprocessable Entity",
-        statusCode: 422,
-      });
-    }
-
-    if (!description || description === "") {
-      return res.status(422).json({
-        message: "O campo de descrição é obrigatório",
-        type: "Unprocessable Entity",
-        statusCode: 422,
-      });
-    }
-
-    if (!category || category === "") {
-      return res.status(422).json({
-        message: "O campo de categoria é obrigatório",
+        message: "A quantidade do pedido é obrigatória",
         type: "Unprocessable Entity",
         statusCode: 422,
       });
@@ -231,31 +215,32 @@ class UserController {
     const existsDish = dishes.find((dish) => dish.nameDish === nameDish);
 
     if (existsDish !== undefined) {
-      return res
-        .status(409)
-        .json({ message: "Esse item já está no carrinho", type: "Conflict", statusCode: 409 });
+      existsDish.image = image;
+      existsDish.quantityOfOrder = quantityOfOrder;
+      existsDish.valueTotal = valueTotal;
+
+      const updateCart = await User.findOneAndUpdate({ _id: user._id }, { cart: cart });
+
+      return res.status(200).json({ message: "Carrinho atualizado", type: "OK", statusCode: 200 });
     }
 
     cart.dishes.push({
       nameDish: nameDish,
       image: image,
-      value: value,
-      servesHowManyPeople: servesHowManyPeople,
-      description: description,
-      category: category,
+      valueTotal: valueTotal,
+      quantityOfOrder: quantityOfOrder,
     });
 
-    const updateCart = await User.updateOne({ cart: cart });
+    const updateCart = await User.findOneAndUpdate({ _id: user._id }, { cart: cart });
 
     return res.status(200).json({
-      message: "Item adicionado ao carrinho",
+      message: "Prato adicionado ao carrinho",
       type: "OK",
       statusCode: 200,
-      cart: updateCart,
     });
   }
 
-  public async getItemsInCart(req: Request, res: Response): Promise<Response> {
+  public async getDishesInCart(req: Request, res: Response): Promise<Response> {
     const { token } = req.params;
 
     if (!token || token === "") {
