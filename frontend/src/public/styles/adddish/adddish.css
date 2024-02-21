@@ -1,0 +1,200 @@
+main {
+  display: block;
+}
+
+.adddish {
+  padding: 1.25rem 1.5rem;
+}
+
+.adddish__title {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.adddish__form {
+  background-color: var(--white);
+  border-radius: .5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+
+  margin-top: 1rem;
+}
+
+.adddish__form label {
+  color: var(--black);
+
+  display: block;
+
+  font-size: 1.15rem;
+  font-weight: 600;
+
+  width: fit-content;
+}
+
+.adddish__input {
+  background-color: #7575753a;
+  border: 2px solid transparent;
+  border-radius: .5rem;
+  outline: 0;
+
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+
+  padding: .75rem;
+
+  transition: .5s border;
+}
+
+.adddish__input:hover,
+.adddish__input:focus {
+  border: 2px solid var(--black);
+}
+
+.adddish__input::placeholder {
+  color: var(--gray);
+}
+
+.adddish__error {
+  color: red;
+
+  display: block;
+
+  font-size: .75rem;
+}
+
+.adddish__button {
+  background-color: var(--yellow);
+  border: 1px solid var(--black);
+  border-radius: .5rem;
+  color: var(--black);
+
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+
+  margin-left: auto;
+  padding: .5rem 1rem;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: .5s all;
+}
+
+.adddish__button:hover {
+  background-color: transparent;
+}
+
+.adddish__modal-background {
+  background-color: rgba(0, 0, 0, .8);
+
+  display: none;
+
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.adddish__modal {
+  background-color: var(--white);
+  border-radius: .5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  width: 80%;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  padding: 1rem;
+
+  transform: translate(-50%, -50%);
+}
+
+.adddish__modal i {
+  color: #FFEA00;
+
+  font-size: 5rem;
+}
+
+.adddish__modal-confirmation {
+  font-weight: 700;
+
+  text-align: center;
+}
+
+.adddish__modal-buttons {
+  align-self: flex-end;
+}
+
+.adddish__modal-button {
+  border: 1px solid var(--black);
+  border-radius: 0.5rem;
+  color: var(--white);
+
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+
+  padding: 0.5rem;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: .5s all;
+}
+
+.adddish__modal-button.confirm {
+  background-color: var(--green);
+}
+
+.adddish__modal-button.cancel {
+  background-color: red;
+}
+
+.adddish__modal-button:hover {
+  background-color: transparent;
+
+  color: var(--black);
+}
+
+@media (min-width: 768px) {
+  .adddish__modal-confirmation {
+    font-size: 1.25rem;
+  }
+
+  .adddish__modal i {
+    font-size: 7rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .adddish {
+    padding: 1.25rem 2.5rem;
+  }
+
+  .adddish__modal {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .adddish {
+    padding: 1.25rem 30rem;
+  }
+
+  .adddish__modal {
+    width: 40%;
+  }
+}

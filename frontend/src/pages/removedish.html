@@ -3,12 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="shortcut icon"
-      type="image/x-icon"
-      href="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
-    />
-    <title>Cardápio | Pitaco Restaurante</title>
+    <title>Adição de pratos | Pitaco Restaurante</title>
     <link
       rel="shortcut icon"
       type="image/x-icon"
@@ -20,8 +15,8 @@
     />
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/base.css" />
-    <link rel="stylesheet" href="/styles/menu/header.css" />
-    <link rel="stylesheet" href="/styles/menu/menu.css" />
+    <link rel="stylesheet" href="/styles/removedish/header.css" />
+    <link rel="stylesheet" href="/styles/removedish/removedish.css" />
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
   </head>
   <body>
@@ -65,44 +60,37 @@
       </nav>
     </header>
     <main>
-      <section class="menu">
-        <h1 class="menu__title">Cardápio</h1>
+      <section class="removedish">
+        <h1 class="removedish__title">Remover prato do cardápio</h1>
+        <p class="removedish__description">Forneça o nome do prato que você deseja excluir</p>
+        <form action="" class="removedish__form">
+          <label for="nameDish">Nome do prato:</label>
+          <input
+            type="text"
+            id="nameDish"
+            placeholder="Nome do prato. Ex: strogonoff, filé de frango, etc.."
+            autocomplete="off"
+            class="removedish__input"
+          />
+          <span class="removedish__error"></span>
 
-        <ul class="menu__list">
-          <li class="menu__item">
-            <a href="/admin/menu/adddish" class="menu__link href">
-              <h3 class="menu__title-card">Adicionar prato</h3>
-              <p class="menu__card-description">
-                Os campos necessários para a criação de um prato, são: nome, imagem, descrição,
-                quantidade de pessoas que o prato serve, categoria e preço
-              </p>
-              <i class="ph ph-caret-right"></i>
-            </a>
-          </li>
-          <li class="menu__item">
-            <a href="/admin/menu/editdish" class="menu__link href">
-              <h3 class="menu__title-card">Editar prato</h3>
-              <p class="menu__card-description">
-                Para efetuar a edição, é necessário informar o nome do prato, e logo após preencher
-                os campos com as informações atualizadas
-              </p>
-              <i class="ph ph-caret-right"></i>
-            </a>
-          </li>
-          <li class="menu__item">
-            <a href="/admin/menu/removedish" class="menu__link href">
-              <h3 class="menu__title-card">Excluir prato</h3>
-              <p class="menu__card-description">
-                Na parte de exclusão, apenas o nome do prato é necessário
-              </p>
-              <i class="ph ph-caret-right"></i>
-            </a>
-          </li>
-        </ul>
+          <button type="submit" class="removedish__button">remover</button>
+        </form>
+
+        <div class="removedish__modal-background">
+          <div class="removedish__modal">
+            <p class="removedish__modal-confirmation"></p>
+            <i class="ph-fill ph-warning"></i>
+            <div class="removedish__modal-buttons">
+              <button type="submit" class="removedish__modal-button cancel">Cancelar</button>
+              <button type="submit" class="removedish__modal-button confirm">Confirmar</button>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
-
-    <script type="module" src="/TagsA.js"></script>
     <script type="module" src="/Hamburger.js"></script>
+    <script type="module" src="/TagsA.js"></script>
+    <script type="module" src="/removedish/RemoveDish.js"></script>
   </body>
 </html>

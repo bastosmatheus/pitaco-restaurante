@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Adição de pratos | Pitaco Restaurante</title>
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nanum+Brush+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/adddish/header.css" />
+    <link rel="stylesheet" href="/styles/adddish/adddish.css" />
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  </head>
+  <body>
+    <header class="header">
+      <img
+        class="header__img"
+        src="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
+        alt="logo do restaurante pitaco"
+        title="logo do restaurante pitaco"
+      />
+      <i class="ph-bold ph-list"></i>
+      <nav class="header__nav">
+        <ul class="header__list">
+          <i class="ph-bold ph-x"></i>
+          <li class="header__item">
+            <img
+              src="https://static.ifood-static.com.br/image/upload/t_thumbnail/logosgde/b2386d8e-9537-4ec2-8023-8d016b685170/202304291916_TJWI_i.jpg"
+              alt="logo do pitaco"
+              class="header__img"
+            />
+          </li>
+          <li class="header__item">
+            <a class="header__link" href="/">
+              <i class="ph-light ph-house"></i>
+              Inicio
+            </a>
+          </li>
+          <li class="header__item">
+            <a class="header__link href" href="/admin/dashboard">
+              <i class="ph-light ph-chalkboard-teacher"></i>
+              Dashboard
+            </a>
+          </li>
+          <li class="header__item">
+            <a class="header__link href" href="/admin/menu">
+              <i class="ph ph-fork-knife"></i>
+              Cardápio
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section class="adddish">
+        <h1 class="adddish__title">Adicionar prato no cardápio</h1>
+        <p class="adddish__description">Forneça as informações para criar um prato no cardápio</p>
+        <form action="" class="adddish__form">
+          <label for="nameDish">Nome do prato:</label>
+          <input
+            type="text"
+            id="nameDish"
+            placeholder="Nome do prato. Ex: strogonoff, filé de frango, etc.."
+            autocomplete="off"
+            class="adddish__input"
+          />
+          <span class="adddish__error"></span>
+
+          <label for="valueDish">Valor do prato (R$):</label>
+          <input
+            type="text"
+            name="valueDish"
+            id="valueDish"
+            placeholder="Valor do prato. Ex: 15.00"
+            autocomplete="off"
+            class="adddish__input"
+          />
+          <span class="adddish__error"></span>
+
+          <label for="imageDish">Imagem do prato:</label>
+          <input
+            type="url"
+            name="imageDish"
+            id="imageDish"
+            placeholder="URL da imagem do prato."
+            autocomplete="off"
+            class="adddish__input"
+          />
+          <span class="adddish__error"></span>
+
+          <label for="descriptionDish">Descrição do prato:</label>
+          <input
+            type="text"
+            name="descriptionDish"
+            id="descriptionDish"
+            placeholder="Descrição do prato."
+            autocomplete="off"
+            class="adddish__input"
+          />
+          <span class="adddish__error"></span>
+
+          <label for="servesHowManyPeople">Serve quantas pessoas:</label>
+          <input
+            type="number"
+            name="servesHowManyPeople"
+            id="servesHowManyPeople"
+            placeholder="Serve quantas pessoas?"
+            autocomplete="off"
+            class="adddish__input"
+          />
+          <span class="adddish__error"></span>
+
+          <label for="categoryDish">Categoria:</label>
+          <select
+            name="categoryDish"
+            id="categoryDish"
+            class="adddish__input">
+            <option value="mais vendidos">Mais Vendidos</option>
+            <option value="match perfeito">Match Perfeito</option>
+            <option value="menu premium">Menu Premium</option>
+            <option value="bebidas">Bebidas</option>
+          </option></select>
+          <span class="adddish__error"></span>
+
+          <button type="submit" class="adddish__button">adicionar</button>
+        </form>
+
+        <div class="adddish__modal-background">
+          <div class="adddish__modal">
+            <p class="adddish__modal-confirmation"></p>
+            <i class="ph-fill ph-warning"></i>
+            <div class="adddish__modal-buttons">
+              <button type="submit" class="adddish__modal-button cancel">Cancelar</button>
+              <button type="submit" class="adddish__modal-button confirm">Confirmar</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/Hamburger.js"></script>
+    <script type="module" src="/TagsA.js"></script>
+    <script type="module" src="/adddish/AddDish.js"></script>
+  </body>
+</html>

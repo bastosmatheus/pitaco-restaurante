@@ -1,0 +1,200 @@
+main {
+  display: block;
+}
+
+.removedish {
+  padding: 1.25rem 1.5rem;
+}
+
+.removedish__title {
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+
+.removedish__form {
+  background-color: var(--white);
+  border-radius: .5rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+
+  margin-top: 1rem;
+}
+
+.removedish__form label {
+  color: var(--black);
+
+  display: block;
+
+  font-size: 1.15rem;
+  font-weight: 600;
+
+  width: fit-content;
+}
+
+.removedish__input {
+  background-color: #7575753a;
+  border: 2px solid transparent;
+  border-radius: .5rem;
+  outline: 0;
+
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+
+  padding: .75rem;
+
+  transition: .5s border;
+}
+
+.removedish__input:hover,
+.removedish__input:focus {
+  border: 2px solid var(--black);
+}
+
+.removedish__input::placeholder {
+  color: var(--gray);
+}
+
+.removedish__error {
+  color: red;
+
+  display: block;
+
+  font-size: .75rem;
+}
+
+.removedish__button {
+  background-color: var(--yellow);
+  border: 1px solid var(--black);
+  border-radius: .5rem;
+  color: var(--black);
+
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+
+  margin-left: auto;
+  padding: .5rem 1rem;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: .5s all;
+}
+
+.removedish__button:hover {
+  background-color: transparent;
+}
+
+.removedish__modal-background {
+  background-color: rgba(0, 0, 0, .8);
+
+  display: none;
+
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.removedish__modal {
+  background-color: var(--white);
+  border-radius: .5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  width: 80%;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  padding: 1rem;
+
+  transform: translate(-50%, -50%);
+}
+
+.removedish__modal i {
+  color: #FFEA00;
+
+  font-size: 5rem;
+}
+
+.removedish__modal-confirmation {
+  font-weight: 700;
+
+  text-align: center;
+}
+
+.removedish__modal-buttons {
+  align-self: flex-end;
+}
+
+.removedish__modal-button {
+  border: 1px solid var(--black);
+  border-radius: 0.5rem;
+  color: var(--white);
+
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+
+  padding: 0.5rem;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: .5s all;
+}
+
+.removedish__modal-button.confirm {
+  background-color: var(--green);
+}
+
+.removedish__modal-button.cancel {
+  background-color: red;
+}
+
+.removedish__modal-button:hover {
+  background-color: transparent;
+
+  color: var(--black);
+}
+
+@media (min-width: 768px) {
+  .removedish__modal-confirmation {
+    font-size: 1.25rem;
+  }
+
+  .removedish__modal i {
+    font-size: 7rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .removedish {
+    padding: 1.25rem 2.5rem;
+  }
+
+  .removedish__modal {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1440px) {
+  .removedish {
+    padding: 1.25rem 30rem;
+  }
+
+  .removedish__modal {
+    width: 40%;
+  }
+}
