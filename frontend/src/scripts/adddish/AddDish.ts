@@ -72,14 +72,13 @@ class AddDish extends ErrorAndModalStyling {
         })
           .then((response) => response.json())
           .then((responseDish: ResponseDish) => {
-            if (responseDish.statusCode === 409) {
+            if (responseDish.message === "Esse prato já existe no cardápio") {
               const spanInputName = inputNameDish.nextElementSibling as HTMLSpanElement;
 
               divBackgroundModal.style.display = "none";
               inputNameDish.style.border = "2px solid red";
               spanInputName.textContent = responseDish.message;
-              inputNameDish.focus();
-              return;
+              return inputNameDish.focus();
             }
 
             this.confirmationModal(

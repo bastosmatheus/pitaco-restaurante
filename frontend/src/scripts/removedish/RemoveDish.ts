@@ -29,7 +29,7 @@ class RemoveDish extends ErrorAndModalStyling {
         })
           .then((response) => response.json())
           .then((responseDish: ResponseDish) => {
-            if (responseDish.statusCode === 404) {
+            if (responseDish.message === "Esse prato não existe no cardápio") {
               const spanInputName = inputNameDish.nextElementSibling as HTMLSpanElement;
 
               spanInputName.textContent = responseDish.message;

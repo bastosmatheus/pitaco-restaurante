@@ -2,6 +2,8 @@ import { CartDish, ResponseCart } from "../@types/types";
 import { Structure } from "../Structure";
 
 class Cart {
+  private ul = document.querySelector(".cart__list") as HTMLUListElement;
+
   public renderDishesInCart() {
     const token = localStorage.getItem("token") || "";
 
@@ -30,7 +32,6 @@ class Cart {
   private createLiAndAddInTheList(dish: CartDish) {
     const structure = new Structure();
 
-    const ul = structure.createElement("ul", { class: "cart__list" });
     const li = structure.createElement("li", { class: "cart__item" });
     const imgDish = structure.createElement("img", {
       class: "cart__img",
@@ -48,8 +49,8 @@ class Cart {
     divFirstColumn.appendChild(spanPrice);
 
     this.addInfos(imgDish, h2NameDish, spanPrice, dish);
-    ul.appendChild(li);
-    divDishes.appendChild(ul);
+    this.ul.appendChild(li);
+    divDishes.appendChild(this.ul);
   }
 
   private addInfos(

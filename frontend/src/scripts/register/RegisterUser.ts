@@ -39,7 +39,7 @@ class RegisterUser extends ErrorAndModalStyling {
         })
           .then((response) => response.json())
           .then((responseDefault: ResponseDefault) => {
-            if (responseDefault.message === "Esse nome de usuário já existe") {
+            if (responseDefault.message === "Esse nome de usuário já está em uso") {
               const divInput = inputUsername.parentElement as HTMLDivElement;
               const spanError = divInput.nextElementSibling as HTMLSpanElement;
 

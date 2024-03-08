@@ -30,7 +30,7 @@ class EditDish extends ErrorAndModalStyling {
       })
         .then((response) => response.json())
         .then((responseDish: ResponseDish) => {
-          if (responseDish.statusCode === 404) {
+          if (responseDish.message === "Esse prato não existe no cardápio") {
             const spanError = inputNameDish.nextElementSibling as HTMLSpanElement;
             inputNameDish.style.border = "2px solid red";
             spanError.textContent = responseDish.message;
