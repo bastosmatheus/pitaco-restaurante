@@ -2,9 +2,9 @@ import "dotenv/config";
 import express from "express";
 import bodyParser from "body-parser";
 import cors from "cors";
-import { routerDish } from "./routes/DishRouter";
-import { routerUser } from "./routes/UserRouter";
-import { Database } from "./db/Database";
+import { routerDish } from "./api/routes/DishRouter";
+import { routerUser } from "./api/routes/UserRouter";
+import { Database } from "./api/database/Database";
 
 const app = express();
 const jsonBodyParser = bodyParser.json();
