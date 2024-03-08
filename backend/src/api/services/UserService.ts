@@ -69,13 +69,11 @@ class UserService {
     const user = await this.userRepository.create(name, lastname, username, email, passwordHash);
 
     if (user == EResponseUser.UsernameExists) {
-      return failure(
-        new ConflictError("Não é possível criar esse nome de usuário, pois ele já existe")
-      );
+      return failure(new ConflictError("Esse nome de usuário já está em uso"));
     }
 
     if (user === EResponseUser.EmailExists) {
-      return failure(new ConflictError("Não é possível criar esse email, pois ele já existe"));
+      return failure(new ConflictError("Esse email já foi cadastrado"));
     }
 
     return success(user);

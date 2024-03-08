@@ -18,7 +18,11 @@ class DishController {
     const dish = await dishService.getById(id);
 
     if (dish.isFailure()) {
-      return res.status(dish.value.statusCode).json(dish.value);
+      return res.status(dish.value.statusCode).json({
+        message: dish.value.message,
+        type: dish.value.type,
+        statusCode: dish.value.statusCode,
+      });
     }
 
     return res.status(200).json({ type: "OK", statusCode: 200, dish: dish.value });
@@ -39,7 +43,11 @@ class DishController {
     );
 
     if (dish.isFailure()) {
-      return res.status(dish.value.statusCode).json(dish.value);
+      return res.status(dish.value.statusCode).json({
+        message: dish.value.message,
+        type: dish.value.type,
+        statusCode: dish.value.statusCode,
+      });
     }
 
     return res.status(201).json({
@@ -68,7 +76,11 @@ class DishController {
     );
 
     if (dish.isFailure()) {
-      return res.status(dish.value.statusCode).json(dish.value);
+      return res.status(dish.value.statusCode).json({
+        message: dish.value.message,
+        type: dish.value.type,
+        statusCode: dish.value.statusCode,
+      });
     }
 
     return res.status(200).json({
@@ -87,7 +99,11 @@ class DishController {
     const dish = await dishService.delete(id);
 
     if (dish.isFailure()) {
-      return res.status(dish.value.statusCode).json(dish.value);
+      return res.status(dish.value.statusCode).json({
+        message: dish.value.message,
+        type: dish.value.type,
+        statusCode: dish.value.statusCode,
+      });
     }
 
     return res.status(200).json({
@@ -106,7 +122,11 @@ class DishController {
     const dish = await dishService.dishExists(nameDish);
 
     if (dish.isFailure()) {
-      return res.status(dish.value.statusCode).json(dish.value);
+      return res.status(dish.value.statusCode).json({
+        message: dish.value.message,
+        type: dish.value.type,
+        statusCode: dish.value.statusCode,
+      });
     }
 
     return res.status(200).json({

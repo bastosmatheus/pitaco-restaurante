@@ -72,7 +72,7 @@ class DishService {
     );
 
     if (dish == EResponseDish.DishExists) {
-      return failure(new ConflictError("Não é possível criar esse prato, pois ele já existe"));
+      return failure(new ConflictError("Esse prato já existe no cardápio"));
     }
 
     return success(dish);
@@ -158,7 +158,7 @@ class DishService {
     const dish = await this.dishRepository.dishExists(nameDish);
 
     if (dish === EResponseDish.DishNotFound) {
-      return failure(new NotFoundError("Nenhum prato encontrado com o nome: " + nameDish));
+      return failure(new NotFoundError("Esse prato não existe no cardápio"));
     }
 
     return success(dish);

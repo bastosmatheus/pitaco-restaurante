@@ -18,7 +18,11 @@ class UserController {
     const user = await userService.getById(id);
 
     if (user.isFailure()) {
-      return res.status(user.value.statusCode).json(user.value);
+      return res.status(user.value.statusCode).json({
+        message: user.value.message,
+        type: user.value.type,
+        statusCode: user.value.statusCode,
+      });
     }
 
     return res.status(200).json({ type: "OK", statusCode: 200, user: user.value });
@@ -32,7 +36,11 @@ class UserController {
     const user = await userService.create(name, lastname, username, email, password);
 
     if (user.isFailure()) {
-      return res.status(user.value.statusCode).json(user.value);
+      return res.status(user.value.statusCode).json({
+        message: user.value.message,
+        type: user.value.type,
+        statusCode: user.value.statusCode,
+      });
     }
 
     return res.status(201).json({
@@ -53,7 +61,11 @@ class UserController {
     const user = await userService.update(id, name, lastname, username, email, password);
 
     if (user.isFailure()) {
-      return res.status(user.value.statusCode).json(user.value);
+      return res.status(user.value.statusCode).json({
+        message: user.value.message,
+        type: user.value.type,
+        statusCode: user.value.statusCode,
+      });
     }
 
     return res.status(200).json({
@@ -72,7 +84,11 @@ class UserController {
     const user = await userService.delete(id);
 
     if (user.isFailure()) {
-      return res.status(user.value.statusCode).json(user.value);
+      return res.status(user.value.statusCode).json({
+        message: user.value.message,
+        type: user.value.type,
+        statusCode: user.value.statusCode,
+      });
     }
 
     return res.status(200).json({
@@ -122,7 +138,11 @@ class UserController {
     );
 
     if (cart.isFailure()) {
-      return res.status(cart.value.statusCode).json(cart.value);
+      return res.status(cart.value.statusCode).json({
+        message: cart.value.message,
+        type: cart.value.type,
+        statusCode: cart.value.statusCode,
+      });
     }
 
     return res.status(200).json({
@@ -140,7 +160,11 @@ class UserController {
     const user = await userService.getDishesInCart(token);
 
     if (user.isFailure()) {
-      return res.status(user.value.statusCode).json(user.value);
+      return res.status(user.value.statusCode).json({
+        message: user.value.message,
+        type: user.value.type,
+        statusCode: user.value.statusCode,
+      });
     }
 
     return res.status(200).json({
